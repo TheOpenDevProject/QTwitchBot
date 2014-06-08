@@ -18,7 +18,14 @@ public:
 signals:
 
 public slots:
+
+private slots:
+    void connected();
+    void disconnected();
+       void readyRead();
 private:
+     QStringList local_net_settings;
+    QTcpSocket *twitch_socket;
     QStringList messageHistory;
 };
 
