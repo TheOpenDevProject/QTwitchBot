@@ -31,6 +31,12 @@
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Twitch oAuth Token </string>
       </property>
@@ -51,6 +57,12 @@
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Twitch Username</string>
       </property>
@@ -65,6 +77,12 @@
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>Settings / Setup</string>
       </property>
@@ -72,6 +90,15 @@
     </item>
     <item row="4" column="1">
      <layout class="QGridLayout" name="SubLayout">
+      <item row="5" column="1">
+       <widget class="QWebView" name="streamView">
+        <property name="url">
+         <url>
+          <string>http://www.twitch.tv/dexter_lol/</string>
+         </url>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="pushButton_5">
         <property name="text">
@@ -79,8 +106,14 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Chat Rate</string>
         </property>
@@ -100,7 +133,14 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="text">
+         <string>Ban User</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
        <widget class="QProgressBar" name="progressBar">
         <property name="value">
          <number>24</number>
@@ -114,29 +154,20 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="5" column="0">
        <widget class="QListView" name="m_CommandView"/>
       </item>
       <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="text">
+         <string>Disable Slow Mode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
        <widget class="QPushButton" name="pushButton_7">
         <property name="text">
          <string>Unban User</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="text">
-         <string>Ban User</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QWebView" name="streamView">
-        <property name="url">
-         <url>
-          <string>http://www.twitch.tv/dexter_lol/</string>
-         </url>
         </property>
        </widget>
       </item>

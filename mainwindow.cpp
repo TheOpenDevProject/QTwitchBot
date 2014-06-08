@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
+    streamMonitor.show();
+    streamMonitor.setTwitchManager(t_manager);
 }
 
 MainWindow::~MainWindow()

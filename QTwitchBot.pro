@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    monitor.cpp
+    monitor.cpp \
+    twitchmanager.cpp
 
 HEADERS  += mainwindow.h \
-    monitor.h
+    monitor.h \
+    twitchmanager.h
 
 FORMS    += mainwindow.ui \
     monitor.ui

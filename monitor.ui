@@ -23,7 +23,7 @@ background-color: qlineargradient(spread:pad, x1:0.489, y1:0, x2:0.494, y2:1, st
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTextBrowser" name="DataFeed"/>
+    <widget class="QListView" name="m_DataView"/>
    </item>
   </layout>
  </widget>
