@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Twitch Chat Monitor</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="localRes.qrc">
+    <normaloff>:/core/res/twitchBotIcon.png</normaloff>:/core/res/twitchBotIcon.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#Monitor{
 background-color: qlineargradient(spread:pad, x1:0.489, y1:0, x2:0.494, y2:1, stop:0 rgba(255, 126, 0, 255), stop:1 rgba(255, 255, 255, 255));}</string>
@@ -23,6 +27,8 @@ background-color: qlineargradient(spread:pad, x1:0.489, y1:0, x2:0.494, y2:1, st
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="localRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

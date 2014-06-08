@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>559</width>
-    <height>358</height>
+    <width>748</width>
+    <height>698</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Twitch Bot - Open Source (Created by TheOpenDevProject)</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="localRes.qrc">
+    <normaloff>:/core/res/twitchBotIcon.png</normaloff>:/core/res/twitchBotIcon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -75,6 +79,13 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Chat Rate</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="pushButton_3">
         <property name="text">
@@ -89,6 +100,13 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="1">
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>24</number>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
@@ -96,20 +114,29 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QListView" name="m_CommandView"/>
       </item>
-      <item row="3" column="1">
-       <widget class="QProgressBar" name="progressBar">
-        <property name="value">
-         <number>24</number>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="text">
+         <string>Unban User</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_6">
         <property name="text">
-         <string>Chat Rate</string>
+         <string>Ban User</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QWebView" name="streamView">
+        <property name="url">
+         <url>
+          <string>http://www.twitch.tv/dexter_lol/</string>
+         </url>
         </property>
        </widget>
       </item>
@@ -122,13 +149,41 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>559</width>
+     <width>748</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionLoad_Commands"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
+  <action name="actionLoad_Commands">
+   <property name="text">
+    <string>Load Commands From File</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="localRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

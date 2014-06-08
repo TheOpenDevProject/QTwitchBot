@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/core">
+        <file>res/twitchBotIcon.png</file>
+    </qresource>
+</RCC>
