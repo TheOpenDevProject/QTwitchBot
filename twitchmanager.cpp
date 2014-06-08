@@ -23,11 +23,12 @@ void twitchManager::connectToChannel(QString server, int port, QString t_Nick, Q
     twitch_socket->connectToHost(server,port);
     if(!twitch_socket->waitForConnected()){
         messageHistory << "Unable to connect to tmi.twitch.tv";
+   }else{
+        messageHistory << "Connected!";
 
-    }
 
-
-    }
+        }
+   }
 
 QStringList twitchManager::getMessageHistory(){
     return messageHistory;
@@ -45,7 +46,7 @@ void twitchManager::connected(){
     QByteArray nsIdentity; // Send matching nick to nickserv
     nsIdentity.append("USER ");
     nsIdentity.append(local_net_settings.at(4)); //Setting 4 is nickname
-    nsIdentity.append(" 8 *: ");
+    nsIdentity.append("8 * :rest");
     nsIdentity.append(local_net_settings.at(2)); //Setting 2 is real name
     nsIdentity.append("\r\n");
     twitch_socket->write(nsIdentity);
@@ -59,6 +60,7 @@ void twitchManager::connected(){
     channelJoin.append("\r\n");
     twitch_socket->write(channelJoin);
     twitch_socket->flush();
+
 }
 
 void twitchManager::disconnected(){
@@ -67,8 +69,10 @@ void twitchManager::disconnected(){
 
 void twitchManager::readyRead(){
     QByteArray array;
-    while( !(array=twitch_socket->readLine()).isNull()){
-        qDebug() << array;
+
+    qDebug() << twitch_socket->readAll();
+    while( !(array = twitch_socket->readLine()).isNull()){
+
     messageHistory << array;
     }
 }

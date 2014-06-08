@@ -17,9 +17,9 @@ public:
     QStringList getMessageHistory();
 signals:
 
-public slots:
 
-private slots:
+
+public slots:
     void connected();
     void disconnected();
        void readyRead();
