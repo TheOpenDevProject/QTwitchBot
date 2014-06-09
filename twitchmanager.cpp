@@ -6,6 +6,7 @@ twitchManager::twitchManager()
 }
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
+    messageHistory << "This is dedicated to Dale Perlov - Thanks for being strong for us - Zac Morris";
     messageHistory << "Attempting to connect to tmi.twitch.tv...";
     local_net_settings.push_back(server);
     local_net_settings.push_back(QString::number(port)); //This must be converted back to an integer for use
