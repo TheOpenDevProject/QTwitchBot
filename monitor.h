@@ -16,7 +16,7 @@ class Monitor : public QWidget
 
 public:
     explicit Monitor(QWidget *parent = 0);
-   QTimer *feedTimer = new QTimer(this);
+  QTimer *feedTimer = new QTimer(this);
    void setTwitchManager(twitchManager *t_manage);
     ~Monitor();
 private slots:

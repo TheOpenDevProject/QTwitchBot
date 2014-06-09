@@ -94,7 +94,7 @@
        <widget class="QWebView" name="streamView">
         <property name="url">
          <url>
-          <string>http://www.twitch.tv/dexter_lol/</string>
+          <string>http://www.twitch.tv/riottoxichawk</string>
          </url>
         </property>
        </widget>

@@ -1,7 +1,6 @@
 #include "twitchmanager.h"
 
-twitchManager::twitchManager(QObject *parent) :
-    QObject(parent)
+twitchManager::twitchManager()
 {
 
 }
@@ -43,10 +42,17 @@ void twitchManager::connected(){
     twitch_socket->write(oAuthToken); //Send to twitch and beg the gate keeper to let us past this stage!
     twitch_socket->flush();
     /////////////////////////////////////////////////////////////////////
+    QByteArray nickArray;
+    nickArray.append("NICK ");
+    nickArray.append(local_net_settings.at(3));
+    nickArray.append("\r\n");
+    twitch_socket->write(nickArray);
+    twitch_socket->flush();
+    ////////////////////////////////////////////////////////////////////
     QByteArray nsIdentity; // Send matching nick to nickserv
     nsIdentity.append("USER ");
     nsIdentity.append(local_net_settings.at(4)); //Setting 4 is nickname
-    nsIdentity.append("8 * :rest");
+    nsIdentity.append(" 8 *: ");
     nsIdentity.append(local_net_settings.at(2)); //Setting 2 is real name
     nsIdentity.append("\r\n");
     twitch_socket->write(nsIdentity);
@@ -70,10 +76,10 @@ void twitchManager::disconnected(){
 void twitchManager::readyRead(){
     QByteArray array;
 
-    qDebug() << twitch_socket->readAll();
-    while( !(array = twitch_socket->readLine()).isNull()){
 
+    while( !(array = twitch_socket->readLine()).isNull()){
     messageHistory << array;
     }
+    qDebug() << messageHistory;
 }
 
