@@ -34,6 +34,19 @@ QStringList twitchManager::getMessageHistory(){
     return messageHistory;
 }
 
+void twitchManager::sendMessage(QString rawMessage)
+{
+    QByteArray message_to_send;
+    message_to_send.append("PRIVMSG #");
+    message_to_send.append(local_net_settings.at(3));
+    message_to_send.append(" :");
+    message_to_send.append(rawMessage);
+    message_to_send.append("\r\n");
+   twitch_socket->write(message_to_send);
+   twitch_socket->flush();
+   messageHistory << "Message to stream(" + rawMessage + ")";
+}
+
 void twitchManager::connected(){
 //This is all done acording to the RFC published by the ieef
     QByteArray oAuthToken;

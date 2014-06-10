@@ -7,7 +7,7 @@ class TwitchCommandList
 {
 public:
     TwitchCommandList();
-    QMap<QString,QString> loadFromFile(QString file_name, QFile c_File);
+    QMap<QString,QString> loadFromFile(QString file_name);
 private:
     QMap<QString,QString> commandTree; //Our Key is a string and our return is a string
 };

@@ -4,8 +4,9 @@ TwitchCommandList::TwitchCommandList()
 {
 }
 
-QMap<QString, QString> TwitchCommandList::loadFromFile(QString file_name,QFile c_File)
+QMap<QString, QString> TwitchCommandList::loadFromFile(QString file_name)
 {
+    QFile c_File;
    //Reset the commandTree from any other times the user loaded the file in this session
     commandTree.clear();
     /////////////////////

@@ -94,13 +94,16 @@
        <widget class="QWebView" name="streamView">
         <property name="url">
          <url>
-          <string>http://www.twitch.tv/riottoxichawk</string>
+          <string>about:blank</string>
          </url>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="EnableSlowBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Enable Slow Mode</string>
         </property>
@@ -120,21 +123,30 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="removeModeratorBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Remove Moderator</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="AnnounceBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Send Announcement</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="banUserBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Ban User</string>
         </property>
@@ -148,7 +160,10 @@
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="addModeratorBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Add Moderator</string>
         </property>
@@ -158,14 +173,20 @@
        <widget class="QListView" name="m_CommandView"/>
       </item>
       <item row="2" column="1">
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QPushButton" name="DisableSlowBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Disable Slow Mode</string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="unbanUserBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Unban User</string>
         </property>

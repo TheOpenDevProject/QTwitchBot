@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "twitchmanager.h"
 #include "monitor.h"
+#include "twitchcommandlist.h"
 namespace Ui {
 class MainWindow;
 }
@@ -16,8 +17,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     twitchManager *t_manager = new twitchManager;
     Monitor streamMonitor;
-
-    ~MainWindow();
+    TwitchCommandList *t_commandList = new TwitchCommandList;
+    ~MainWindow(){
+        //dtor
+        delete t_manager;
+       delete t_commandList;
+        delete ui;
+    }
 
 private slots:
     void on_pushButton_clicked();
