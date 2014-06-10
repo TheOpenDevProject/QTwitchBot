@@ -22,6 +22,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_actionLoad_Commands_triggered();
+
 private:
     Ui::MainWindow *ui;
 
