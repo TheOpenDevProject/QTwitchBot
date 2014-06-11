@@ -112,6 +112,12 @@ void twitchManager::setCommandList(QMap<QString, QString> commandMap){
 
 
 void twitchManager::commandHandler(QString streamInput){
+    if(streamInput == "PING :tmi.twitch.tv\r\n"){
+    twitch_socket->write("PONG tmi.twitch.tv\r\n");
+            twitch_socket->flush();
+            qDebug() << "Pong Sent";
+    }
+
    commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
    commandMatchFound = commandExpression.match(streamInput);
    bool hasMatch = commandMatchFound.hasMatch();
@@ -123,6 +129,7 @@ void twitchManager::commandHandler(QString streamInput){
         map_ittr.next();
         if(map_ittr.key() == commandFound){
             //This could be moved into a function pointer array if the list of functions get big
+            //We need to deal with the end new line characters if they are present
             if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
                 getTime();
             }else{
