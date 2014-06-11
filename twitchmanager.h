@@ -34,6 +34,10 @@ private:
     QMap<QString,QString>commandMap_kp;
     QRegularExpression commandExpression;
     QRegularExpressionMatch commandMatchFound;
+    //Here is where we can create special functions and make internal calls
+    void getTime();
+
+
 };
 
 #endif // TWITCHMANAGER_H

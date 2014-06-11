@@ -1,5 +1,6 @@
 #include "twitchmanager.h"
 #include <QMapIterator>
+#include <QTime>
 twitchManager::twitchManager()
 {
 
@@ -98,6 +99,12 @@ void twitchManager::readyRead(){
     qDebug() << messageHistory;
 }
 
+void twitchManager::getTime()
+{
+    QTime sysTime;
+   sendMessage(sysTime.currentTime().toString());
+}
+
 void twitchManager::setCommandList(QMap<QString, QString> commandMap){
     commandMap_kp = commandMap;
     qDebug() << commandMap_kp;
@@ -114,10 +121,15 @@ void twitchManager::commandHandler(QString streamInput){
     while(map_ittr.hasNext()){
         map_ittr.next();
         if(map_ittr.key() == commandFound){
+            //This could be moved into a function pointer array if the list of functions get big
+            if(map_ittr.value() == "[GetTime]"){
+                getTime();
+            }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
            }
 
+          }
+        }
     }
-   }
 }
