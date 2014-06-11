@@ -72,8 +72,8 @@ void twitchManager::connected(){
     nsIdentity.append("\r\n");
     twitch_socket->write(nsIdentity);
     twitch_socket->flush();
-    /////////////////////////////////////////////////////////////////////
-    //Finally join the stream!
+    //////////////////////////////////////////////////////////////////////
+    //Finally join the stream!                                                                      //
     ////////////////////////////////////////////////////////////////////
     QByteArray channelJoin;
     channelJoin.append("JOIN #");
@@ -128,7 +128,6 @@ void twitchManager::commandHandler(QString streamInput){
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
            }
-
           }
         }
     }
