@@ -30,8 +30,11 @@ private slots:
 
     void on_actionLoad_Commands_triggered();
 
+    void on_addModeratorBttn_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QStringListModel commandKeys;
 
 };
 //Within this class we need to reimplement the ability to move the window around when a user clicks on the Form Widget

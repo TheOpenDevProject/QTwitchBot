@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QWebSettings>
 #include <QFileDialog>
+#include <QInputDialog>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -31,4 +32,15 @@ void MainWindow::on_actionLoad_Commands_triggered()
 {
     QString script_file = QFileDialog::getOpenFileName(this,tr("Load Twitch Bot Script"),"/scripts",tr("Script Files (*.tbs)"));
     t_manager->setCommandList(t_commandList->loadFromFile(script_file));
+    commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
+    ui->m_CommandView->setModel(&commandKeys);
+}
+
+void MainWindow::on_addModeratorBttn_clicked()
+{
+    bool ok;
+   QString modName = QInputDialog::getText(this,tr("Add Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+   if(ok && !modName.isEmpty()){
+       t_manager->sendMessage("/mod " + modName);
+   }
 }

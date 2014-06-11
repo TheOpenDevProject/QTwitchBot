@@ -19,6 +19,7 @@ public:
     void setCommandList(QMap<QString,QString> commandMap);
     void sendMessage(QString rawMessage);
     void commandHandler(QString streamInput);
+    QStringList getCommandKeysAsStringList();
 signals:
 
 

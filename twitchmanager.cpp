@@ -110,6 +110,7 @@ void twitchManager::setCommandList(QMap<QString, QString> commandMap){
     qDebug() << commandMap_kp;
 }
 
+
 void twitchManager::commandHandler(QString streamInput){
    commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
    commandMatchFound = commandExpression.match(streamInput);
@@ -122,13 +123,30 @@ void twitchManager::commandHandler(QString streamInput){
         map_ittr.next();
         if(map_ittr.key() == commandFound){
             //This could be moved into a function pointer array if the list of functions get big
-            if(map_ittr.value() == "[GetTime]"){
+            if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
                 getTime();
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
            }
+
           }
         }
     }
+}
+
+QStringList twitchManager::getCommandKeysAsStringList()
+{
+    if(!commandMap_kp.isEmpty()){
+        QStringList keyList;
+       QMapIterator<QString,QString>map_ittr(commandMap_kp);
+       while(map_ittr.hasNext()){
+           map_ittr.next();
+            keyList << map_ittr.key();
+       }
+       return keyList;
+    }else{
+    qDebug() << "No Keys Found!";
+    }
+
 }
