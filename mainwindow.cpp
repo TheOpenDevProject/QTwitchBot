@@ -24,6 +24,7 @@ void MainWindow::on_pushButton_clicked()
         ui->unbanUserBttn->setEnabled(true);
         ui->EnableSlowBttn->setEnabled(true);
         ui->DisableSlowBttn->setEnabled(true);
+        ui->clearStreamBttn->setEnabled(true);
         //Set stream webkit view to streamers name
         ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text());
 }
@@ -43,4 +44,59 @@ void MainWindow::on_addModeratorBttn_clicked()
    if(ok && !modName.isEmpty()){
        t_manager->sendMessage("/mod " + modName);
    }
+}
+
+void MainWindow::on_clearStreamBttn_clicked()
+{
+    t_manager->sendMessage("/clear");
+}
+
+void MainWindow::on_removeModeratorBttn_clicked()
+{
+    bool ok;
+   QString modName = QInputDialog::getText(this,tr("Remove Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+   if(ok && !modName.isEmpty()){
+       t_manager->sendMessage("/unmod " + modName);
+   }
+}
+
+void MainWindow::on_banUserBttn_clicked()
+{
+    bool ok;
+   QString banName = QInputDialog::getText(this,tr("Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+   if(ok && !banName.isEmpty()){
+       t_manager->sendMessage("/ban " + banName);
+   }
+}
+
+void MainWindow::on_unbanUserBttn_clicked()
+{
+    bool ok;
+   QString banName = QInputDialog::getText(this,tr("Un-Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+   if(ok && !banName.isEmpty()){
+       t_manager->sendMessage("/unban " + banName);
+   }
+}
+
+void MainWindow::on_AnnounceBttn_clicked()
+{
+    bool ok;
+   QString message = QInputDialog::getText(this,tr("Make Announcement"),tr("Enter  Announcement To Send"),QLineEdit::Normal,NULL,&ok);
+   if(ok && !message.isEmpty()){
+       t_manager->sendMessage(message);
+   }
+}
+
+void MainWindow::on_EnableSlowBttn_clicked()
+{
+    bool ok;
+   int delayTime = QInputDialog::getInt(this,tr("Set Slow Mode"),tr("Delay Time"),0,1,214743647,1,&ok);
+   if(ok){
+       t_manager->sendMessage("/slow " + QString::number(delayTime));
+   }
+}
+
+void MainWindow::on_DisableSlowBttn_clicked()
+{
+       t_manager->sendMessage("/slowoff");
 }

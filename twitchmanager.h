@@ -37,6 +37,7 @@ private:
     QRegularExpressionMatch commandMatchFound;
     //Here is where we can create special functions and make internal calls
     void getTime();
+    void randomNumber();
 
 
 };

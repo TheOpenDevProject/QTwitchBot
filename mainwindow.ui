@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>698</height>
+    <width>1043</width>
+    <height>704</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -137,6 +137,12 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>75</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string>Send Announcement</string>
         </property>
@@ -192,6 +198,16 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="clearStreamBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Clear Stream Chat</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -201,7 +217,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>748</width>
+     <width>1043</width>
      <height>21</height>
     </rect>
    </property>

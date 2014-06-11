@@ -32,6 +32,20 @@ private slots:
 
     void on_addModeratorBttn_clicked();
 
+    void on_clearStreamBttn_clicked();
+
+    void on_removeModeratorBttn_clicked();
+
+    void on_banUserBttn_clicked();
+
+    void on_unbanUserBttn_clicked();
+
+    void on_AnnounceBttn_clicked();
+
+    void on_EnableSlowBttn_clicked();
+
+    void on_DisableSlowBttn_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStringListModel commandKeys;

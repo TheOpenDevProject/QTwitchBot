@@ -1,6 +1,7 @@
 #include "twitchmanager.h"
 #include <QMapIterator>
 #include <QTime>
+
 twitchManager::twitchManager()
 {
 
@@ -104,6 +105,11 @@ void twitchManager::getTime()
     QTime sysTime;
    sendMessage(sysTime.currentTime().toString());
 }
+void twitchManager::randomNumber(){
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+   sendMessage(QString::number(qrand() % (1000 - 1) - (0) + 0));
+}
 
 void twitchManager::setCommandList(QMap<QString, QString> commandMap){
     commandMap_kp = commandMap;
@@ -132,6 +138,8 @@ void twitchManager::commandHandler(QString streamInput){
             //We need to deal with the end new line characters if they are present
             if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
                 getTime();
+            }else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
+            randomNumber();
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
