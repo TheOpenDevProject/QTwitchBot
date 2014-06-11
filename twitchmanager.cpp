@@ -1,5 +1,5 @@
 #include "twitchmanager.h"
-
+#include <QMapIterator>
 twitchManager::twitchManager()
 {
 
@@ -92,8 +92,32 @@ void twitchManager::readyRead(){
 
 
     while( !(array = twitch_socket->readLine()).isNull()){
+   commandHandler(array);
     messageHistory << array;
     }
     qDebug() << messageHistory;
 }
 
+void twitchManager::setCommandList(QMap<QString, QString> commandMap){
+    commandMap_kp = commandMap;
+    qDebug() << commandMap_kp;
+}
+
+void twitchManager::commandHandler(QString streamInput){
+   commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
+   commandMatchFound = commandExpression.match(streamInput);
+   bool hasMatch = commandMatchFound.hasMatch();
+   if(hasMatch){
+   QString commandFound = commandMatchFound.captured();
+   commandFound.chop(1);
+   QMapIterator<QString,QString> map_ittr(commandMap_kp);
+    while(map_ittr.hasNext()){
+        map_ittr.next();
+        if(map_ittr.key() == commandFound){
+            sendMessage(map_ittr.value());
+            qDebug() << map_ittr.value();
+           }
+
+    }
+   }
+}

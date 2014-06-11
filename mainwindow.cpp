@@ -30,5 +30,5 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_actionLoad_Commands_triggered()
 {
     QString script_file = QFileDialog::getOpenFileName(this,tr("Load Twitch Bot Script"),"/scripts",tr("Script Files (*.tbs)"));
-    t_commandList->loadFromFile(script_file);
+    t_manager->setCommandList(t_commandList->loadFromFile(script_file));
 }

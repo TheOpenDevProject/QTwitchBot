@@ -18,6 +18,7 @@ public:
     QStringList getMessageHistory();
     void setCommandList(QMap<QString,QString> commandMap);
     void sendMessage(QString rawMessage);
+    void commandHandler(QString streamInput);
 signals:
 
 
@@ -31,6 +32,8 @@ private:
     QTcpSocket *twitch_socket;
     QStringList messageHistory;
     QMap<QString,QString>commandMap_kp;
+    QRegularExpression commandExpression;
+    QRegularExpressionMatch commandMatchFound;
 };
 
 #endif // TWITCHMANAGER_H
