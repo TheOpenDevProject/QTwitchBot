@@ -127,6 +127,7 @@ void MainWindow::on_actionLoad_Music_From_Folder_triggered()
         err_out.setText("You MUST select at least ONE file for playback");
         err_out.exec();
     }else{
+      t_manager->setMusicPlayer(&streamPlayer);
     streamPlayer.setPlaylistFromFile(musicFiles);
     m_musicFiles.setStringList(musicFiles);
     ui->music_List_view->setModel(&m_musicFiles);

@@ -4,4 +4,6 @@
 !time,[GetTime]
 !playing,League of Legends
 !genNum,[randomNumber]
+!nextSong,[nextSong]
+!goBack,[prevSong]
 !helloYoutube,This is our response

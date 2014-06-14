@@ -9,9 +9,11 @@ public:
     void nextSong();
     void prevSong();
     void pause();
+    void stop();
     void play();
     void setPlaylistFromFile(QStringList songList);
     void setVolume(int vol);
+    QTime getCurrentSongTime();
 private:
     QMediaPlayer *m_mediaPlayer = new QMediaPlayer;
     QMediaPlaylist *m_mediaPlaylist = new QMediaPlaylist(m_mediaPlayer);

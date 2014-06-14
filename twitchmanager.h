@@ -10,6 +10,7 @@
 #include <QStringList>
 #include <QMap>
 #include <QTimer>
+#include "musicplayer.h"
 class twitchManager : public QObject
 {
     Q_OBJECT
@@ -22,6 +23,7 @@ public:
     void commandHandler(QString streamInput);
     QStringList getCommandKeysAsStringList();
     QTimer *updateCommandRate = new QTimer(this);
+    void setMusicPlayer(MusicPlayer *p_m_player);
     int getCommandRate();
 signals:
 
@@ -44,6 +46,7 @@ private:
     //Here is where we can create special functions and make internal calls
     void getTime();
     void randomNumber();
+    MusicPlayer *m_player;
 
 
 };

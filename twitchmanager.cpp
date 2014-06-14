@@ -141,6 +141,11 @@ void twitchManager::commandHandler(QString streamInput){
                 getTime();
             }else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
             randomNumber();
+            }else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
+                m_player->nextSong();
+            }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]")
+            {
+            m_player->prevSong();
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
@@ -165,6 +170,11 @@ QStringList twitchManager::getCommandKeysAsStringList()
     qDebug() << "No Keys Found!";
     }
 
+}
+
+void twitchManager::setMusicPlayer(MusicPlayer *p_m_player)
+{
+    m_player = p_m_player;
 }
 
 int twitchManager::getCommandRate()
