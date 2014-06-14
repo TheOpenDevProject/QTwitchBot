@@ -16,12 +16,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     monitor.cpp \
     twitchmanager.cpp \
-    twitchcommandlist.cpp
+    twitchcommandlist.cpp \
+    musicplayer.cpp \
+    notewindow.cpp
 
 HEADERS  += mainwindow.h \
     monitor.h \
     twitchmanager.h \
-    twitchcommandlist.h
+    twitchcommandlist.h \
+    musicplayer.h \
+    notewindow.h
 
 FORMS    += mainwindow.ui \
     monitor.ui

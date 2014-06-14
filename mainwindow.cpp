@@ -3,6 +3,7 @@
 #include <QWebSettings>
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,7 +27,9 @@ void MainWindow::on_pushButton_clicked()
         ui->DisableSlowBttn->setEnabled(true);
         ui->clearStreamBttn->setEnabled(true);
         //Set stream webkit view to streamers name
-        ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text());
+        ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout");
+        ui->chatFeed->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout=");
+        updateCmdTimer->start(3);
 }
 
 void MainWindow::on_actionLoad_Commands_triggered()
@@ -99,4 +102,49 @@ void MainWindow::on_EnableSlowBttn_clicked()
 void MainWindow::on_DisableSlowBttn_clicked()
 {
        t_manager->sendMessage("/slowoff");
+}
+
+void MainWindow::on_actionDisable_Javascript_triggered()
+{
+     ui->streamView->settings()->setAttribute(QWebSettings::JavascriptEnabled,false);
+}
+
+void MainWindow::on_actionEnable_Javascript_triggered()
+{
+    ui->streamView->settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
+}
+
+void MainWindow::updateCmdRate(){
+    ui->progressBar->setValue(t_manager->getCommandRate());
+}
+
+void MainWindow::on_actionLoad_Music_From_Folder_triggered()
+{
+    musicFiles.clear();
+    QMessageBox err_out;
+    musicFiles = QFileDialog::getOpenFileNames(this,tr("Load Music"),tr("/"),tr("All Files(*.*)"));
+    if(musicFiles.empty()){
+        err_out.setText("You MUST select at least ONE file for playback");
+        err_out.exec();
+    }else{
+    streamPlayer.setPlaylistFromFile(musicFiles);
+    m_musicFiles.setStringList(musicFiles);
+    ui->music_List_view->setModel(&m_musicFiles);
+    }
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    streamPlayer.play();
+}
+
+void MainWindow::on_v_Slider_valueChanged(int value)
+{
+    streamPlayer.setVolume(value);
+    ui->volumeLbl->setText("Current Volume" + QString::number(value));
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    streamPlayer.nextSong();
 }

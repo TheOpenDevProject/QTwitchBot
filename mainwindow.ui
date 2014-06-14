@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1043</width>
-    <height>704</height>
+    <width>1154</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,15 +90,6 @@
     </item>
     <item row="4" column="1">
      <layout class="QGridLayout" name="SubLayout">
-      <item row="5" column="1">
-       <widget class="QWebView" name="streamView">
-        <property name="url">
-         <url>
-          <string>about:blank</string>
-         </url>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="EnableSlowBttn">
         <property name="enabled">
@@ -118,7 +109,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Chat Rate</string>
+         <string>Command Rate</string>
         </property>
        </widget>
       </item>
@@ -161,7 +152,7 @@
       <item row="6" column="1">
        <widget class="QProgressBar" name="progressBar">
         <property name="value">
-         <number>24</number>
+         <number>0</number>
         </property>
        </widget>
       </item>
@@ -174,9 +165,6 @@
          <string>Add Moderator</string>
         </property>
        </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QListView" name="m_CommandView"/>
       </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="DisableSlowBttn">
@@ -208,6 +196,157 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="1">
+       <widget class="QTabWidget" name="m_playeyTab">
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Live Stream</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QWebView" name="streamView">
+            <property name="url">
+             <url>
+              <string>about:blank</string>
+             </url>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Chat Feed</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QWebView" name="chatFeed">
+            <property name="url">
+             <url>
+              <string>about:blank</string>
+             </url>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string>Music Player</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QListView" name="music_List_view"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Controlls</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>Play</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="text">
+                <string>Pause</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QPushButton" name="pushButton_4">
+               <property name="text">
+                <string>Stop</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLabel" name="volumeLbl">
+               <property name="text">
+                <string>Current Volume:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <widget class="QSlider" name="v_Slider">
+               <property name="value">
+                <number>99</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="text">
+                <string>Next Song</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="pushButton_6">
+               <property name="text">
+                <string>Previous Song</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QPushButton" name="pushButton_7">
+               <property name="text">
+                <string>Restart Song</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="title">
+             <string>Now Playing</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="4" column="0" rowspan="2">
+       <widget class="QListView" name="m_CommandView"/>
+      </item>
      </layout>
     </item>
    </layout>
@@ -217,7 +356,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1043</width>
+     <width>1154</width>
      <height>21</height>
     </rect>
    </property>
@@ -226,10 +365,19 @@
      <string>File</string>
     </property>
     <addaction name="actionLoad_Commands"/>
+    <addaction name="actionLoad_Music_From_Folder"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuExtra">
+    <property name="title">
+     <string>Extra</string>
+    </property>
+    <addaction name="actionEnable_Javascript"/>
+    <addaction name="actionDisable_Javascript"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuExtra"/>
   </widget>
   <action name="actionLoad_Commands">
    <property name="text">
@@ -239,6 +387,21 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionEnable_Javascript">
+   <property name="text">
+    <string>Enable Javascript</string>
+   </property>
+  </action>
+  <action name="actionDisable_Javascript">
+   <property name="text">
+    <string>Disable Javascript</string>
+   </property>
+  </action>
+  <action name="actionLoad_Music_From_Folder">
+   <property name="text">
+    <string>Load Music From Folder</string>
    </property>
   </action>
  </widget>

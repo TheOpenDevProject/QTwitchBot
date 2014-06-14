@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QStringList>
 #include <QMap>
+#include <QTimer>
 class twitchManager : public QObject
 {
     Q_OBJECT
@@ -20,6 +21,8 @@ public:
     void sendMessage(QString rawMessage);
     void commandHandler(QString streamInput);
     QStringList getCommandKeysAsStringList();
+    QTimer *updateCommandRate = new QTimer(this);
+    int getCommandRate();
 signals:
 
 
@@ -28,7 +31,10 @@ public slots:
     void connected();
     void disconnected();
        void readyRead();
+       void updateCommandRate_Slot();
 private:
+       int commandRateMS = 0;
+
      QStringList local_net_settings;
     QTcpSocket *twitch_socket;
     QStringList messageHistory;

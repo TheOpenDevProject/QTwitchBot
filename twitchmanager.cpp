@@ -4,7 +4,7 @@
 
 twitchManager::twitchManager()
 {
-
+connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()));
 }
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
@@ -27,7 +27,7 @@ void twitchManager::connectToChannel(QString server, int port, QString t_Nick, Q
         messageHistory << "Unable to connect to tmi.twitch.tv";
    }else{
         messageHistory << "Connected!";
-
+        updateCommandRate->start(3000);
 
         }
    }
@@ -128,6 +128,7 @@ void twitchManager::commandHandler(QString streamInput){
    commandMatchFound = commandExpression.match(streamInput);
    bool hasMatch = commandMatchFound.hasMatch();
    if(hasMatch){
+      commandRateMS++;
    QString commandFound = commandMatchFound.captured();
    commandFound.chop(1);
    QMapIterator<QString,QString> map_ittr(commandMap_kp);
@@ -164,4 +165,13 @@ QStringList twitchManager::getCommandKeysAsStringList()
     qDebug() << "No Keys Found!";
     }
 
+}
+
+int twitchManager::getCommandRate()
+{
+    return commandRateMS;
+}
+//We refresh our command rate at an interval of 3 secconds
+void twitchManager::updateCommandRate_Slot() {
+    commandRateMS = 0;
 }
