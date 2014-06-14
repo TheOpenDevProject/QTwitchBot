@@ -376,8 +376,15 @@
     <addaction name="actionEnable_Javascript"/>
     <addaction name="actionDisable_Javascript"/>
    </widget>
+   <widget class="QMenu" name="menuDoNatE">
+    <property name="title">
+     <string>Donate!</string>
+    </property>
+    <addaction name="actionPaypal"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuExtra"/>
+   <addaction name="menuDoNatE"/>
   </widget>
   <action name="actionLoad_Commands">
    <property name="text">
@@ -402,6 +409,11 @@
   <action name="actionLoad_Music_From_Folder">
    <property name="text">
     <string>Load Music From Folder</string>
+   </property>
+  </action>
+  <action name="actionPaypal">
+   <property name="text">
+    <string>Paypal</string>
    </property>
   </action>
  </widget>
