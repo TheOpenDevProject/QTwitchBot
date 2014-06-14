@@ -142,7 +142,7 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_v_Slider_valueChanged(int value)
 {
     streamPlayer.setVolume(value);
-    ui->volumeLbl->setText("Current Volume" + QString::number(value));
+    ui->volumeLbl->setText("Current Volume: " + QString::number(value));
 }
 
 void MainWindow::on_pushButton_5_clicked()
