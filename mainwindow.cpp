@@ -48,6 +48,16 @@ void MainWindow::on_addModeratorBttn_clicked()
        t_manager->sendMessage("/mod " + modName);
    }
 }
+//Install a keyboard hander
+void MainWindow::keyPressEvent(QKeyEvent *e){
+    if(e->key() == Qt::Key_F1){
+        streamMonitor.hide();
+    }
+    if(e->key() == Qt::Key_F2){
+        streamMonitor.show();
+    }
+
+}
 
 void MainWindow::on_clearStreamBttn_clicked()
 {
@@ -148,4 +158,14 @@ void MainWindow::on_v_Slider_valueChanged(int value)
 void MainWindow::on_pushButton_5_clicked()
 {
     streamPlayer.nextSong();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    streamPlayer.pause();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    streamPlayer.stop();
 }

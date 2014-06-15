@@ -63,12 +63,17 @@ private slots:
 
    void on_pushButton_5_clicked();
 
+   void on_pushButton_3_clicked();
+
+   void on_pushButton_4_clicked();
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;
     Ui::MainWindow *ui;
     QStringListModel commandKeys;
-
+protected:
+    void keyPressEvent(QKeyEvent *e);
 
 };
 //Within this class we need to reimplement the ability to move the window around when a user clicks on the Form Widget
