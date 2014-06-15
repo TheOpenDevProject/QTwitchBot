@@ -7,6 +7,8 @@
 #include "twitchcommandlist.h"
 #include <QTimer>
 #include "musicplayer.h"
+#include <functional>
+#include <vector>
 namespace Ui {
 class MainWindow;
 }
@@ -67,11 +69,20 @@ private slots:
 
    void on_pushButton_4_clicked();
 
+   void on_pushButton_7_clicked();
+
+   void on_m_playeyTab_tabCloseRequested(int index);
+
+   void on_comboBox_currentIndexChanged(int index);
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;
     Ui::MainWindow *ui;
     QStringListModel commandKeys;
+    std::vector<std::function<void()>> themeManager;
+    void enableCartoonDarkTheme();
+    void enableDefaultTheme();
 protected:
     void keyPressEvent(QKeyEvent *e);
 

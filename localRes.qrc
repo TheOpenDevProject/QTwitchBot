@@ -2,4 +2,7 @@
     <qresource prefix="/core">
         <file>res/twitchBotIcon.png</file>
     </qresource>
+    <qresource prefix="/themes">
+        <file>res/cartoonDark/cartoon-dark-bng.jpg</file>
+    </qresource>
 </RCC>

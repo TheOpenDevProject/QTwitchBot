@@ -10,12 +10,23 @@
     <height>740</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <stylestrategy>PreferAntialias</stylestrategy>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Twitch Bot - Open Source (Created by TheOpenDevProject)</string>
   </property>
   <property name="windowIcon">
    <iconset resource="localRes.qrc">
     <normaloff>:/core/res/twitchBotIcon.png</normaloff>:/core/res/twitchBotIcon.png</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -50,10 +61,21 @@
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="twitch_user"/>
+     <widget class="QLineEdit" name="twitch_user">
+      <property name="placeholderText">
+       <string>Enter your Twitch username</string>
+      </property>
+     </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="twitch_token"/>
+     <widget class="QLineEdit" name="twitch_token">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Enter Open Authentication Token found at http://twitchapps.com/tmi/</string>
+      </property>
+     </widget>
     </item>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
@@ -197,9 +219,15 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QTabWidget" name="m_playeyTab">
+       <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
+        </property>
+        <property name="tabsClosable">
+         <bool>false</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -295,12 +323,15 @@
              <item row="3" column="2">
               <widget class="QLabel" name="volumeLbl">
                <property name="text">
-                <string>Current Volume:</string>
+                <string>Current Volume: 100</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0" colspan="2">
               <widget class="QSlider" name="v_Slider">
+               <property name="maximum">
+                <number>100</number>
+               </property>
                <property name="value">
                 <number>99</number>
                </property>
@@ -338,6 +369,34 @@
             <property name="title">
              <string>Now Playing</string>
             </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="InterFace_ops">
+         <attribute name="title">
+          <string>Customise Interface</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Select Theme</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>Default</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cartoon Dark</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>

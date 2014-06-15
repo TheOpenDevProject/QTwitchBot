@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -12,6 +13,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
+    ///////////////////////////////////////////////////////
+    //                      Theme Manger V.10                           //
+    //////////////////////////////////////////////////////
+  auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
+  auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
+    themeManager.emplace_back(defaultTheme);
+    themeManager.emplace_back(cartoonDark);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -168,4 +176,31 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
     streamPlayer.stop();
+}
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    //This will make the effect of a restart
+    streamPlayer.stop();
+    streamPlayer.play();
+}
+
+void MainWindow::on_m_playeyTab_tabCloseRequested(int index)
+{
+
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    themeManager.at(index)();
+}
+
+void MainWindow::enableCartoonDarkTheme(){
+    this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/cartoonDark/cartoon-dark-bng.jpg);} #m_CommandView{background-color: rgb(62, 62, 62);color: rgb(255, 255, 255);}#tab_3{background-color: rgb(62, 62, 62);color: rgb(255, 255, 255);}");
+
+}
+
+void MainWindow::enableDefaultTheme()
+{
+    this->setStyleSheet("");
 }
