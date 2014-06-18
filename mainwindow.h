@@ -71,8 +71,6 @@ private slots:
 
    void on_pushButton_7_clicked();
 
-   void on_m_playeyTab_tabCloseRequested(int index);
-
    void on_comboBox_currentIndexChanged(int index);
 
 private:

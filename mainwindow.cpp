@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
+
+            ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
     ///////////////////////////////////////////////////////
@@ -35,8 +36,9 @@ void MainWindow::on_pushButton_clicked()
         ui->DisableSlowBttn->setEnabled(true);
         ui->clearStreamBttn->setEnabled(true);
         //Set stream webkit view to streamers name
-     //   ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout");
-        //ui->chatFeed->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout=");
+
+    ui->streamView->load(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout"));
+   ui->chatFeed->setUrl(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout="));
      //   updateCmdTimer->start(3);
 }
 
@@ -185,10 +187,6 @@ void MainWindow::on_pushButton_7_clicked()
     streamPlayer.play();
 }
 
-void MainWindow::on_m_playeyTab_tabCloseRequested(int index)
-{
-
-}
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {

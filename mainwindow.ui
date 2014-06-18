@@ -221,13 +221,13 @@
       <item row="4" column="1">
        <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <property name="tabsClosable">
          <bool>false</bool>
         </property>
         <property name="movable">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">

@@ -16,7 +16,7 @@ void twitchManager::connectToChannel(QString server, int port, QString t_Nick, Q
     local_net_settings.push_back(t_channel);
     local_net_settings.push_back(t_username);
     local_net_settings.push_back(t_oAuthToken);
-
+    local_net_settings.push_back(t_Nick);
     messageHistory << "Store settings (OK)";
     twitch_socket = new QTcpSocket(this);
     connect(twitch_socket,SIGNAL(connected()),this,SLOT(connected()));
