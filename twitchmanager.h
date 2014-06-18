@@ -20,6 +20,8 @@ public:
     QStringList getMessageHistory();
     void setCommandList(QMap<QString,QString> commandMap);
     void sendMessage(QString rawMessage);
+    void sendRaw(QByteArray rawMessage);
+    void getModeratorList();
     void commandHandler(QString streamInput);
     QStringList getCommandKeysAsStringList();
     QTimer *updateCommandRate = new QTimer(this);
@@ -47,7 +49,7 @@ private:
     void getTime();
     void randomNumber();
     MusicPlayer *m_player;
-
+    QMap<QString,int> accessLevel;
 
 };
 

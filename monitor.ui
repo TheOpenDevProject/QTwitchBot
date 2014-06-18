@@ -25,6 +25,16 @@ background-color: qlineargradient(spread:pad, x1:0.489, y1:0, x2:0.494, y2:1, st
    <item row="0" column="0">
     <widget class="QListView" name="m_DataView"/>
    </item>
+   <item row="1" column="0">
+    <widget class="QLineEdit" name="developer_sendRaw">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources>

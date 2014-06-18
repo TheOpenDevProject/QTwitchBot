@@ -4,5 +4,6 @@
     </qresource>
     <qresource prefix="/themes">
         <file>res/cartoonDark/cartoon-dark-bng.jpg</file>
+        <file>res/TeKeLiLi/background.jpg</file>
     </qresource>
 </RCC>

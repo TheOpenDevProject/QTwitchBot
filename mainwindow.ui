@@ -33,15 +33,8 @@
     <property name="horizontalSpacing">
      <number>0</number>
     </property>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>Connect To Twitch!</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
+    <item row="4" column="0">
+     <widget class="QLabel" name="settingsSetup_lbl">
       <property name="font">
        <font>
         <weight>75</weight>
@@ -49,44 +42,16 @@
        </font>
       </property>
       <property name="text">
-       <string>Twitch oAuth Token </string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Settings &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;/ &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Setup&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="twitch_user">
-      <property name="placeholderText">
-       <string>Enter your Twitch username</string>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="twitch_token">
-      <property name="echoMode">
-       <enum>QLineEdit::Password</enum>
-      </property>
-      <property name="placeholderText">
-       <string>Enter Open Authentication Token found at http://twitchapps.com/tmi/</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Twitch Username</string>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -97,8 +62,8 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_3">
+    <item row="0" column="0">
+     <widget class="QLabel" name="twitchUser_lbl">
       <property name="font">
        <font>
         <weight>75</weight>
@@ -106,16 +71,80 @@
        </font>
       </property>
       <property name="text">
-       <string>Settings / Setup</string>
+       <string>Twitch Username</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="twitch_token">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Enter Open Authentication Token found at http://twitchapps.com/tmi/</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="twitch_user">
+      <property name="placeholderText">
+       <string>Enter your Twitch username</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="toathToken_lbl">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Twitch oAuth Token </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Connect To Twitch!</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
+      <property name="default">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
      <layout class="QGridLayout" name="SubLayout">
       <item row="1" column="1">
        <widget class="QPushButton" name="EnableSlowBttn">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Enable Slow Mode</string>
@@ -133,12 +162,21 @@
         <property name="text">
          <string>Command Rate</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QPushButton" name="removeModeratorBttn">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Remove Moderator</string>
@@ -156,6 +194,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Send Announcement</string>
         </property>
@@ -165,6 +209,12 @@
        <widget class="QPushButton" name="banUserBttn">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Ban User</string>
@@ -183,6 +233,15 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Add Moderator</string>
         </property>
@@ -192,6 +251,12 @@
        <widget class="QPushButton" name="DisableSlowBttn">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Disable Slow Mode</string>
@@ -203,6 +268,12 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Unban User</string>
         </property>
@@ -213,6 +284,12 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
         <property name="text">
          <string>Clear Stream Chat</string>
         </property>
@@ -221,7 +298,7 @@
       <item row="4" column="1">
        <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <property name="tabsClosable">
          <bool>false</bool>
@@ -325,6 +402,9 @@
                <property name="text">
                 <string>Current Volume: 100</string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
               </widget>
              </item>
              <item row="3" column="0" colspan="2">
@@ -397,6 +477,11 @@
               <string>Cartoon Dark</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>TeKe-LiLi</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -407,6 +492,26 @@
        <widget class="QListView" name="m_CommandView"/>
       </item>
      </layout>
+    </item>
+    <item row="4" column="1">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="1" colspan="2">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -423,6 +528,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNew_Note"/>
     <addaction name="actionLoad_Commands"/>
     <addaction name="actionLoad_Music_From_Folder"/>
     <addaction name="separator"/>
@@ -473,6 +579,11 @@
   <action name="actionPaypal">
    <property name="text">
     <string>Paypal</string>
+   </property>
+  </action>
+  <action name="actionNew_Note">
+   <property name="text">
+    <string>New Note</string>
    </property>
   </action>
  </widget>

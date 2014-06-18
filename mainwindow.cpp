@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+     //Makes our MainWindow the controller
             ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
@@ -19,8 +20,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //////////////////////////////////////////////////////
   auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
   auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
+  auto TeKeLiLi = std::bind(&MainWindow::enableTekeLiLiTheme,this);
     themeManager.emplace_back(defaultTheme);
     themeManager.emplace_back(cartoonDark);
+    themeManager.emplace_back(TeKeLiLi);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -194,11 +197,69 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 }
 
 void MainWindow::enableCartoonDarkTheme(){
-    this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/cartoonDark/cartoon-dark-bng.jpg);} #m_CommandView{background-color: rgb(62, 62, 62);color: rgb(255, 255, 255);}#tab_3{background-color: rgb(62, 62, 62);color: rgb(255, 255, 255);}");
+    this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/cartoonDark/cartoon-dark-bng.jpg);} QLabel{color:#FA4B4B;} QPushButton{background-color:#FA4B4B; color:#fff;}");
+    ui->addModeratorBttn->setFlat(true);
+    ui->removeModeratorBttn->setFlat(true);
+     ui->AnnounceBttn->setFlat(true);
+       ui->banUserBttn->setFlat(true);
+        ui->unbanUserBttn->setFlat(true);
+        ui->EnableSlowBttn->setFlat(true);
+        ui->DisableSlowBttn->setFlat(true);
+        ui->clearStreamBttn->setFlat(true);
+
+
+        ui->addModeratorBttn->setAutoFillBackground(true);
+        ui->removeModeratorBttn->setAutoFillBackground(true);
+         ui->AnnounceBttn->setAutoFillBackground(true);
+           ui->banUserBttn->setAutoFillBackground(true);
+            ui->unbanUserBttn->setAutoFillBackground(true);
+            ui->EnableSlowBttn->setAutoFillBackground(true);
+            ui->DisableSlowBttn->setAutoFillBackground(true);
+            ui->clearStreamBttn->setAutoFillBackground(true);
 
 }
 
 void MainWindow::enableDefaultTheme()
 {
     this->setStyleSheet("");
+}
+
+void MainWindow::enableTekeLiLiTheme()
+{
+    this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/TeKeLiLi/background.jpg);} #settingsSetup_lbl{color:#fff;} #twitchUser_lbl{color:#fff;} #toathToken_lbl{color:#fff;} progressBar{color#fff;} QPushButton{background-color:#A4F069; color:#000;}");
+    streamMonitor.setStyleSheet("#Monitor{border-image:url(:/themes/res/TeKeLiLi/background.jpg); background-color:none;}");
+    ui->addModeratorBttn->setFlat(true);
+    ui->removeModeratorBttn->setFlat(true);
+     ui->AnnounceBttn->setFlat(true);
+       ui->banUserBttn->setFlat(true);
+        ui->unbanUserBttn->setFlat(true);
+        ui->EnableSlowBttn->setFlat(true);
+        ui->DisableSlowBttn->setFlat(true);
+        ui->clearStreamBttn->setFlat(true);
+
+
+        ui->addModeratorBttn->setAutoFillBackground(true);
+        ui->removeModeratorBttn->setAutoFillBackground(true);
+         ui->AnnounceBttn->setAutoFillBackground(true);
+           ui->banUserBttn->setAutoFillBackground(true);
+            ui->unbanUserBttn->setAutoFillBackground(true);
+            ui->EnableSlowBttn->setAutoFillBackground(true);
+            ui->DisableSlowBttn->setAutoFillBackground(true);
+            ui->clearStreamBttn->setAutoFillBackground(true);
+
+}
+
+void MainWindow::on_actionNew_Note_triggered()
+{
+    displayWindows.push_back(new popupDisplayWindow);
+    displayWindows.back()->show();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    qApp->quit();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event){
+   qApp->quit();
 }

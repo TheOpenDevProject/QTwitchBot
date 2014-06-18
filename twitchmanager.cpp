@@ -49,6 +49,19 @@ void twitchManager::sendMessage(QString rawMessage)
    messageHistory << "Message to stream(" + rawMessage + ")";
 }
 
+void twitchManager::sendRaw(QByteArray rawMessage)
+{
+    rawMessage.append("\r\n");
+    twitch_socket->write(rawMessage);
+    twitch_socket->flush();
+    messageHistory << "Raw Command Sent to tmi.twitch.tv: " + rawMessage;
+}
+
+void twitchManager::getModeratorList()
+{
+sendMessage("/mods");
+}
+
 void twitchManager::connected(){
 //This is all done acording to the RFC published by the ieef
     QByteArray oAuthToken;
@@ -82,7 +95,10 @@ void twitchManager::connected(){
     channelJoin.append("\r\n");
     twitch_socket->write(channelJoin);
     twitch_socket->flush();
-
+    ////////////////////////////////////////////////////////////////////
+    //Get a list of moderators
+    ////////////////////////////////////////////////////////////////////
+   getModeratorList();
 }
 
 void twitchManager::disconnected(){
@@ -154,6 +170,7 @@ void twitchManager::commandHandler(QString streamInput){
           }
         }
     }
+
 }
 
 QStringList twitchManager::getCommandKeysAsStringList()

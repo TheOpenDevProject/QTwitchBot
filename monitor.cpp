@@ -11,6 +11,8 @@ Monitor::Monitor(QWidget *parent) :
     feedTimer->start(100);
     this->setWindowFlags(Qt::FramelessWindowHint);
    ui->m_DataView->setModel(&feed_model);
+   //We can enable the developer option by pressing F7
+   ui->developer_sendRaw->setVisible(false);
 }
 
 Monitor::~Monitor()
@@ -36,6 +38,14 @@ void Monitor::keyPressEvent(QKeyEvent *e){
 
     if(e->key() == Qt::Key_F11){
         this->setGeometry(this->x(),this->y(),this->width() - 4,this->height() - 4);
+    }
+    if(e->key() == Qt::Key_F7){
+        ui->developer_sendRaw->setVisible(true);
+    }
+    if(e->key() == Qt::Key_Enter){
+        QByteArray rawCommand;
+        rawCommand.append(ui->developer_sendRaw->text());
+        twitch_manager->sendRaw(rawCommand);
     }
 }
 
