@@ -35,9 +35,9 @@ void MainWindow::on_pushButton_clicked()
         ui->DisableSlowBttn->setEnabled(true);
         ui->clearStreamBttn->setEnabled(true);
         //Set stream webkit view to streamers name
-        ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout");
-        ui->chatFeed->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout=");
-        updateCmdTimer->start(3);
+     //   ui->streamView->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout");
+        //ui->chatFeed->setUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout=");
+     //   updateCmdTimer->start(3);
 }
 
 void MainWindow::on_actionLoad_Commands_triggered()
