@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QTwitchBot
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
-
+DEFINES += QT_NO_WARNING_OUTPUT QT_NO_DEBUG_OUTPUT
 SOURCES += main.cpp\
         mainwindow.cpp \
     monitor.cpp \

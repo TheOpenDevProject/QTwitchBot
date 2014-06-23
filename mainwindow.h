@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QWebSettings>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QColorDialog>
 #include "twitchmanager.h"
 #include "monitor.h"
 #include "twitchcommandlist.h"
@@ -14,7 +19,7 @@
 namespace Ui {
 class MainWindow;
 }
-
+//All usages of pointers are now updated to use C++11 smart pointers
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,7 +34,8 @@ public:
      ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
-                std::for_each(displayWindows.begin(),displayWindows.end(),std::default_delete<popupDisplayWindow>());
+        //Update made and now using C++11 smart pointers
+       // std::for_each(displayWindows.begin(),displayWindows.end(),std::default_delete<popupDisplayWindow>());
         delete ui;
         delete t_manager;
        delete t_commandList;
@@ -82,13 +88,22 @@ private slots:
 
    void on_actionExit_triggered();
 
+   void on_pushButton_8_clicked();
+
+   void on_pushButton_10_clicked();
+
+   void on_pushButton_9_clicked();
+
+   void on_pushButton_11_clicked();
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;
     Ui::MainWindow *ui;
     QStringListModel commandKeys;
     std::vector<std::function<void()>> themeManager;
-    std::vector<popupDisplayWindow*> displayWindows; //All Popup display windows should be added into here
+    //The scope of the pointer is this class
+    std::vector<std::shared_ptr<popupDisplayWindow>> displayWindows; //All Popup display windows should be added into here
     void enableCartoonDarkTheme();
     void enableDefaultTheme();
     void enableTekeLiLiTheme();

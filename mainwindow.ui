@@ -295,10 +295,13 @@
         </property>
        </widget>
       </item>
+      <item row="4" column="0" rowspan="2">
+       <widget class="QListView" name="m_CommandView"/>
+      </item>
       <item row="4" column="1">
        <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <property name="tabsClosable">
          <bool>false</bool>
@@ -486,10 +489,66 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>NoteWindow Globals</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="noteWindowG_lbl">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Note Window Controlls</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignHCenter|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="text">
+             <string>Set Brush Size</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="text">
+             <string>Set Paint Brush Colour</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="text">
+             <string>Set Chroma Key Colour (Window Background Colour)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_8">
+            <property name="text">
+             <string>Set Window Title (Global)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="text">
+             <string>Destroy From Memory (Warning: May SegFault) - Developer Only</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
-      </item>
-      <item row="4" column="0" rowspan="2">
-       <widget class="QListView" name="m_CommandView"/>
       </item>
      </layout>
     </item>

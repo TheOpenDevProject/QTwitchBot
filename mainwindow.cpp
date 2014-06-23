@@ -1,9 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QWebSettings>
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -251,7 +247,8 @@ void MainWindow::enableTekeLiLiTheme()
 
 void MainWindow::on_actionNew_Note_triggered()
 {
-    displayWindows.push_back(new popupDisplayWindow);
+    //Patched for C++11 smart pointers
+    displayWindows.push_back(std::shared_ptr<popupDisplayWindow>(new popupDisplayWindow));
     displayWindows.back()->show();
 }
 
@@ -262,4 +259,71 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::closeEvent(QCloseEvent *event){
    qApp->quit();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    bool ok;
+
+    if(!displayWindows.empty()){
+        QString winTitle = QInputDialog::getText(this,tr("Set Window Title"),tr("Enter A Window Title"),QLineEdit::Normal,NULL,&ok);
+   if(ok){
+        for(int i;i < displayWindows.size();i++){
+        displayWindows.at(i)->setWindowTitle(winTitle);
+        }
+    }
+    }else{
+        QMessageBox errorbox;
+        errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
+        errorbox.exec();
+    }
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    if(!displayWindows.empty()){
+        QColor bngcolour = QColorDialog::getColor(Qt::white,this,tr("Select A Colour"),0);
+   for (int i;i < displayWindows.size(); i++){
+   displayWindows.at(i)->setBackgroundColour(bngcolour);
+   }
+    }else{
+        //No note windows in vector
+        QMessageBox errorbox;
+        errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
+        errorbox.exec();
+    }
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    if(!displayWindows.empty()){
+        QColor brushcolour = QColorDialog::getColor(Qt::white,this,tr("Select A Colour"),0);
+        for (int i;i < displayWindows.size(); i++){
+        displayWindows.at(i)->setBrushColour(brushcolour);
+        }
+    }else{
+        //No note windows in vector
+        QMessageBox errorbox;
+        errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
+        errorbox.exec();
+    }
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    bool xOk = false;
+    bool yOk = false;
+    if(!displayWindows.empty()){
+        float brushSizeX = QInputDialog::getDouble(this,tr("Enter Width"),tr("Enter A Width"),0,0,2147483647,2,&xOk,0);
+         float brushSizeY = QInputDialog::getDouble(this,tr("Enter Height"),tr("Enter A Height"),0,0,2147483647,2,&yOk,0);
+        if(xOk && yOk){
+          for(int i;i < displayWindows.size(); i++){
+              displayWindows.at(i)->setBrushSize(brushSizeX,brushSizeY);
+          }
+        }
+    }else{
+        QMessageBox errorbox;
+        errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
+        errorbox.exec();
+    }
 }

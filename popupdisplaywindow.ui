@@ -31,8 +31,17 @@
    </property>
    <item row="0" column="0">
     <widget class="QGraphicsView" name="displayView">
+     <property name="renderHints">
+      <set>QPainter::Antialiasing|QPainter::HighQualityAntialiasing|QPainter::SmoothPixmapTransform|QPainter::TextAntialiasing</set>
+     </property>
+     <property name="cacheMode">
+      <set>QGraphicsView::CacheNone</set>
+     </property>
      <property name="viewportUpdateMode">
       <enum>QGraphicsView::FullViewportUpdate</enum>
+     </property>
+     <property name="optimizationFlags">
+      <set>QGraphicsView::DontSavePainterState|QGraphicsView::IndirectPainting</set>
      </property>
     </widget>
    </item>
