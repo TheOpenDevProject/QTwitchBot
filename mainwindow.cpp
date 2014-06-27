@@ -17,9 +17,11 @@ MainWindow::MainWindow(QWidget *parent) :
   auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
   auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
   auto TeKeLiLi = std::bind(&MainWindow::enableTekeLiLiTheme,this);
+  auto carbonToxic = std::bind(&MainWindow::enableToxicCarbonTheme,this);
     themeManager.emplace_back(defaultTheme);
     themeManager.emplace_back(cartoonDark);
     themeManager.emplace_back(TeKeLiLi);
+    themeManager.emplace_back(carbonToxic);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -44,9 +46,13 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_actionLoad_Commands_triggered()
 {
     QString script_file = QFileDialog::getOpenFileName(this,tr("Load Twitch Bot Script"),"/scripts",tr("Script Files (*.tbs)"));
+    if(script_file.isEmpty()){
+        qDebug() << "External Error: No File Selected";
+    }else{
     t_manager->setCommandList(t_commandList->loadFromFile(script_file));
     commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
     ui->m_CommandView->setModel(&commandKeys);
+    }
 }
 
 void MainWindow::on_addModeratorBttn_clicked()
@@ -242,6 +248,35 @@ void MainWindow::enableTekeLiLiTheme()
             ui->EnableSlowBttn->setAutoFillBackground(true);
             ui->DisableSlowBttn->setAutoFillBackground(true);
             ui->clearStreamBttn->setAutoFillBackground(true);
+
+}
+
+void MainWindow::enableToxicCarbonTheme()
+{
+ QMessageBox dedication;
+ dedication.setText("This theme is dedicated to Riot ToxicHawk");
+ dedication.exec();
+ dedication.setText("Patient tester and Inspiration for the project - Thankyou buddy :)");
+ dedication.exec();
+  this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/Premium-Carbon/background.png);} #settingsSetup_lbl{color:#fff;} #twitchUser_lbl{color:#fff;} #toathToken_lbl{color:#fff;} progressBar{color#fff;} QPushButton{background-color:#A4F069; color:#000;}");
+ ui->addModeratorBttn->setFlat(true);
+ ui->removeModeratorBttn->setFlat(true);
+  ui->AnnounceBttn->setFlat(true);
+    ui->banUserBttn->setFlat(true);
+     ui->unbanUserBttn->setFlat(true);
+     ui->EnableSlowBttn->setFlat(true);
+     ui->DisableSlowBttn->setFlat(true);
+     ui->clearStreamBttn->setFlat(true);
+
+
+     ui->addModeratorBttn->setAutoFillBackground(true);
+     ui->removeModeratorBttn->setAutoFillBackground(true);
+      ui->AnnounceBttn->setAutoFillBackground(true);
+        ui->banUserBttn->setAutoFillBackground(true);
+         ui->unbanUserBttn->setAutoFillBackground(true);
+         ui->EnableSlowBttn->setAutoFillBackground(true);
+         ui->DisableSlowBttn->setAutoFillBackground(true);
+         ui->clearStreamBttn->setAutoFillBackground(true);
 
 }
 

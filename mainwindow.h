@@ -107,6 +107,7 @@ private:
     void enableCartoonDarkTheme();
     void enableDefaultTheme();
     void enableTekeLiLiTheme();
+    void enableToxicCarbonTheme();
 protected:
     void keyPressEvent(QKeyEvent *e);
 
