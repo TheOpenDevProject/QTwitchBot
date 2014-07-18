@@ -23,6 +23,7 @@ QMap<QString, QString> TwitchCommandList::loadFromFile(QString file_name)
    QString keyPair = c_File.readLine();
    //If we find a Moderator
    if(keyPair.at(1) == QString("M")){
+       //Operation: 1) Split line into list, remove the ModFlag, add to Moderator command list.
        QStringList keyPairListm = keyPair.split(",");
        keyPairListm.first().remove(0,3);
     modCommandTree.insert(keyPairListm.at(0),keyPairListm.at(1));

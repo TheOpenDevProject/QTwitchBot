@@ -42,15 +42,35 @@ float QPaintSceneC::setBrushSize(float w, float h)
 {
     bsX = w;
     bsY = h;
+    return 0;
+}
+
+void popupDisplayWindow::p_addText(QString txtToDraw)
+{
+   QFont calibri("Calibri",14,QFont::Bold);
+    qgs->addText(txtToDraw,calibri);
+    
+}
+
+void popupDisplayWindow::setActiveBrushType(int abt)
+{
+ qgs->setActiveBrushType(abt);   
 }
 
 void QPaintSceneC::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->MouseButtonPress){
+        if(getActiveBrushType() == SQUARE_BRUSH){
         this->addRect(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
             qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+    }else if(getActiveBrushType() == ELIPSE_BRUSH){
+            this->addEllipse(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
+                qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+        }else if(getActiveBrushType() == LINE_BRUSH){
+        //    this->addLine(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
+                qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+        }
     }
-
 }
 void QPaintSceneC::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if(event->MouseButtonPress){
@@ -58,4 +78,12 @@ void QPaintSceneC::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
             qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
     }
+}
+
+int QPaintSceneC::getActiveBrushType()
+{
+    return activeBrushType;
+}
+void QPaintSceneC::setActiveBrushType(int abt){
+    activeBrushType = abt;
 }

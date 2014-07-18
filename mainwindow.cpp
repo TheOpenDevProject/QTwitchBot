@@ -40,7 +40,7 @@ void MainWindow::on_pushButton_clicked()
 
     ui->streamView->load(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout"));
    ui->chatFeed->setUrl(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout="));
-     //   updateCmdTimer->start(3);
+
 }
 
 void MainWindow::on_actionLoad_Commands_triggered()
@@ -360,5 +360,13 @@ void MainWindow::on_pushButton_11_clicked()
         QMessageBox errorbox;
         errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
         errorbox.exec();
+    }
+}
+
+void MainWindow::on_pushButton_13_clicked()
+{
+    if(!displayWindows.empty()){
+
+        displayWindows.at(0)->p_addText("FUN TimeS");
     }
 }

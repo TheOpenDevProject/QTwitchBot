@@ -27,7 +27,7 @@ void twitchManager::connectToChannel(QString server, int port, QString t_Nick, Q
         messageHistory << "Unable to connect to tmi.twitch.tv";
    }else{
         messageHistory << "Connected!";
-        updateCommandRate->start(3000);
+    //    updateCommandRate->start(3000);
 
         }
    }
@@ -98,7 +98,7 @@ void twitchManager::connected(){
     ////////////////////////////////////////////////////////////////////
     //Get a list of moderators
     ////////////////////////////////////////////////////////////////////
-   getModeratorList();
+   //getModeratorList();
 }
 
 void twitchManager::disconnected(){
@@ -134,6 +134,7 @@ void twitchManager::setCommandList(QMap<QString, QString> commandMap){
 
 
 void twitchManager::commandHandler(QString streamInput){
+  //  commandExpression.setPattern("(?<=");
     if(streamInput == "PING :tmi.twitch.tv\r\n"){
     twitch_socket->write("PONG tmi.twitch.tv\r\n");
             twitch_socket->flush();
@@ -162,6 +163,8 @@ void twitchManager::commandHandler(QString streamInput){
             }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]")
             {
             m_player->prevSong();
+            }else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
+                sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
