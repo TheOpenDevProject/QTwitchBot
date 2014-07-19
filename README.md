@@ -1,7 +1,7 @@
 QTwitchBot is an opensource Twitch.tv bot that runs on Windows/Mac/Linux
 
 ===============================================
-	TwitchBot Alpha Release V.1
+	TwitchBot Beta Release V.1.2
 	Please Give Feedback On GitHub
 ===============================================
 
@@ -26,7 +26,7 @@ The TBL has support for special commands that call a function in the program in 
 [randomNumber] = Generates a random number from 1 - 1000
 [nextSong] = Plays next song in loaded playlist
 [prevSong] = Plays previous song in loaded playlist
-
+[whatNext] = What is the next song playing, sends this out to the stream
 A special command is created like so...
 
 !command,[special]
@@ -45,3 +45,5 @@ Add Moderator / Remove Moderator
 
 View the live feed of the stream from the bot (Requires Flash)
 View the chat feed as seen on Twitch.tv (Broken)
+Theme Engine
+Paint Overlays
