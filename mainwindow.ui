@@ -279,22 +279,6 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="clearStreamBttn">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Clear Stream Chat</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0" rowspan="2">
        <widget class="QListView" name="m_CommandView"/>
       </item>
@@ -569,6 +553,22 @@
         </widget>
        </widget>
       </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="clearStreamBttn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Clear Stream Chat</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item row="4" column="1">
@@ -618,6 +618,8 @@
     </property>
     <addaction name="actionEnable_Javascript"/>
     <addaction name="actionDisable_Javascript"/>
+    <addaction name="actionScript_Editor"/>
+    <addaction name="actionReload_Current_TBS"/>
    </widget>
    <widget class="QMenu" name="menuDoNatE">
     <property name="title">
@@ -662,6 +664,16 @@
   <action name="actionNew_Note">
    <property name="text">
     <string>New Note</string>
+   </property>
+  </action>
+  <action name="actionScript_Editor">
+   <property name="text">
+    <string>Script Editor</string>
+   </property>
+  </action>
+  <action name="actionReload_Current_TBS">
+   <property name="text">
+    <string>Reload Current TBS</string>
    </property>
   </action>
  </widget>

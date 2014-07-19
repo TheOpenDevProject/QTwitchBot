@@ -52,7 +52,9 @@ void MainWindow::on_actionLoad_Commands_triggered()
     t_manager->setCommandList(t_commandList->loadFromFile(script_file));
     commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
     ui->m_CommandView->setModel(&commandKeys);
-    }
+    tbsScriptURL = script_file;
+    scriptEditor->loadFromFile(script_file);
+     }
 }
 
 void MainWindow::on_addModeratorBttn_clicked()
@@ -369,4 +371,16 @@ void MainWindow::on_pushButton_13_clicked()
 
         displayWindows.at(0)->p_addText("FUN TimeS");
     }
+}
+
+void MainWindow::on_actionScript_Editor_triggered()
+{
+    scriptEditor->show();
+}
+
+void MainWindow::on_actionReload_Current_TBS_triggered()
+{
+    t_manager->setCommandList(t_commandList->loadFromFile(tbsScriptURL));
+    commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
+    ui->m_CommandView->setModel(&commandKeys);
 }

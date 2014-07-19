@@ -18,18 +18,21 @@ SOURCES += main.cpp\
     twitchmanager.cpp \
     twitchcommandlist.cpp \
     musicplayer.cpp \
-    popupdisplaywindow.cpp
+    popupdisplaywindow.cpp \
+    scriptedit.cpp
 
 HEADERS  += mainwindow.h \
     monitor.h \
     twitchmanager.h \
     twitchcommandlist.h \
     musicplayer.h \
-    popupdisplaywindow.h
+    popupdisplaywindow.h \
+    scriptedit.h
 
 FORMS    += mainwindow.ui \
     monitor.ui \
-    popupdisplaywindow.ui
+    popupdisplaywindow.ui \
+    scriptedit.ui
 
 RESOURCES += \
     localRes.qrc
