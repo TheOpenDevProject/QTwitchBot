@@ -384,3 +384,8 @@ void MainWindow::on_actionReload_Current_TBS_triggered()
     commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
     ui->m_CommandView->setModel(&commandKeys);
 }
+
+void MainWindow::on_pushButton_15_clicked()
+{
+
+}

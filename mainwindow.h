@@ -17,7 +17,6 @@
 #include <vector>
 #include "popupdisplaywindow.h"
 #include <memory>
-
 namespace Ui {
 class MainWindow;
 }
@@ -78,6 +77,8 @@ private slots:
    void on_pushButton_13_clicked();
    void on_actionScript_Editor_triggered();
    void on_actionReload_Current_TBS_triggered();
+
+   void on_pushButton_15_clicked();
 
 private:
        QStringList musicFiles;

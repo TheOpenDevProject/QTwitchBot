@@ -17,6 +17,7 @@ void scriptEdit::loadFromFile(QString path_toFile)
     scriptFile.open(QFile::ReadWrite);
     if(scriptFile.isOpen() && scriptFile.isReadable() && scriptFile.isWritable()){
     ui->scriptView->setPlainText(scriptFile.readAll());
+
     }else{
         QMessageBox error;
         error.setText("There was an error when trying to load your script file (FileIO Error)");

@@ -160,8 +160,7 @@ void twitchManager::commandHandler(QString streamInput){
             randomNumber();
             }else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
                 m_player->nextSong();
-            }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]")
-            {
+            }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
             m_player->prevSong();
             }else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
                 sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
