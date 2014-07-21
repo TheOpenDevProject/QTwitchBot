@@ -17,6 +17,7 @@
 #include <vector>
 #include "popupdisplaywindow.h"
 #include <memory>
+#include <apimanager.h>
 namespace Ui {
 class MainWindow;
 }
@@ -33,6 +34,7 @@ public:
     QTimer *updateCmdTimer = new QTimer(this);
     MusicPlayer streamPlayer;
     scriptEdit *scriptEditor = new scriptEdit;
+    RiotAPI riot_api;
      ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
@@ -79,7 +81,7 @@ private slots:
    void on_actionReload_Current_TBS_triggered();
 
    void on_pushButton_15_clicked();
-
+void riotAPI_NewData(QByteArray data);
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;

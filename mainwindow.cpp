@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
     ///////////////////////////////////////////////////////
-    //                      Theme Manger V.10                           //
+    // Theme Manger V.10              //
     //////////////////////////////////////////////////////
   auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
   auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     themeManager.emplace_back(cartoonDark);
     themeManager.emplace_back(TeKeLiLi);
     themeManager.emplace_back(carbonToxic);
+    connect(&riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_NewData(QByteArray)));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -387,5 +388,11 @@ void MainWindow::on_actionReload_Current_TBS_triggered()
 
 void MainWindow::on_pushButton_15_clicked()
 {
+riot_api.requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 
+}
+
+void MainWindow::riotAPI_NewData(QByteArray data)
+{
+    qDebug() << data;
 }

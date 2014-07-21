@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     twitchcommandlist.cpp \
     musicplayer.cpp \
     popupdisplaywindow.cpp \
-    scriptedit.cpp
+    scriptedit.cpp \
+    apimanager.cpp
 
 HEADERS  += mainwindow.h \
     monitor.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     twitchcommandlist.h \
     musicplayer.h \
     popupdisplaywindow.h \
-    scriptedit.h
+    scriptedit.h \
+    apimanager.h
 
 FORMS    += mainwindow.ui \
     monitor.ui \
