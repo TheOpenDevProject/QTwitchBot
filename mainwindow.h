@@ -31,7 +31,6 @@ public:
     twitchManager *t_manager = new twitchManager;
     Monitor streamMonitor;
     TwitchCommandList *t_commandList = new TwitchCommandList;
-    QTimer *updateCmdTimer = new QTimer(this);
     MusicPlayer streamPlayer;
     scriptEdit *scriptEditor = new scriptEdit;
     RiotAPI riot_api;
@@ -61,7 +60,7 @@ private slots:
     void on_DisableSlowBttn_clicked();
     void on_actionDisable_Javascript_triggered();
     void on_actionEnable_Javascript_triggered();
-    void updateCmdRate();
+
     void on_actionLoad_Music_From_Folder_triggered();
     void on_pushButton_2_clicked();
    void on_v_Slider_valueChanged(int value);

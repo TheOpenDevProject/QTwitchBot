@@ -142,10 +142,6 @@ void MainWindow::on_actionEnable_Javascript_triggered()
     ui->streamView->settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
 }
 
-void MainWindow::updateCmdRate(){
-    ui->progressBar->setValue(t_manager->getCommandRate());
-}
-
 void MainWindow::on_actionLoad_Music_From_Folder_triggered()
 {
     musicFiles.clear();
@@ -376,7 +372,8 @@ void MainWindow::on_pushButton_13_clicked()
 
 void MainWindow::on_actionScript_Editor_triggered()
 {
-    scriptEditor->show();
+ //   scriptEditor->show();
+
 }
 
 void MainWindow::on_actionReload_Current_TBS_triggered()
@@ -395,4 +392,8 @@ riot_api.requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 void MainWindow::riotAPI_NewData(QByteArray data)
 {
     qDebug() << data;
+    QPixmap thePix;
+    thePix.loadFromData(data);
+    thePix.setDevicePixelRatio(1.5);
+    ui->sumonerIcon_Lbl->setPixmap(thePix);
 }
