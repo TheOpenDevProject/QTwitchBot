@@ -80,7 +80,7 @@ private slots:
    void on_actionReload_Current_TBS_triggered();
 
    void on_pushButton_15_clicked();
-void riotAPI_NewData(QByteArray data);
+void riotAPI_BasicProfileUpdated(QByteArray data);
 void on_setApiButton_clicked();
 
 private:

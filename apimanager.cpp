@@ -9,6 +9,8 @@ RiotAPI::RiotAPI(QObject *parent):
 
 void RiotAPI::replyFinished(QNetworkReply *reply){
     QByteArray byteReply = reply->readAll();
+    rawapidata = byteReply;
+    ParseAndSet();
     emit requestComplete(byteReply);
 }
 void RiotAPI::requestBasicProfile(QString summoner_name){
@@ -24,12 +26,33 @@ void RiotAPI::setAPIKey(QString riotAPIKey)
 {
     riotAPI_Key = riotAPIKey;
 }
+
 void RiotAPI::ParseAndSet(){
 
+    //Each state considered critical to valid data can cause a break in the function because, proceeding with an error would be useless.
+    if(rawapidata.isEmpty()){
+        qDebug() << "Basic profile no json data found";
+   return;
+    }
+
+    //We have data, Proceed with JSON specific validation + loading document
+        QJsonParseError jerror;
+        QJsonDocument jdoc  = QJsonDocument::fromJson(rawapidata,&jerror);
+        //Check if there was an issue parsing the JSON document, If there was just end the entire function execution.
+
+      //  if(jerror.error() != QJsonParseError::NoError){
+  //          qDebug() << "Unable to parse JSON document(" << jerror.errorString() << ")";
+   //     return;
+   //     }
+
+       //Get the root element of the basic summoner profile, Currently we can expect this to be the summoners name.
+        QJsonObject jrootObject = jdoc.object();
+        summonerID = jrootObject.keys().at(0);
+        qDebug() << summonerID;
+        QJsonArray jProfileArray = jrootObject["sumcoolaid"].toArray();
+        qDebug() << jProfileArray.at(0);
+
+
+
 }
 
-/*
-void RiotAPI::requestSummonerIcon(QString summoner_name){
-    qnam->get(QNetworkRequest(QUrl("http://avatar.leagueoflegends.com/OC1/" + summoner_name + ".png")));
-}
-*/

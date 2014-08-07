@@ -268,7 +268,7 @@
       <item row="4" column="1">
        <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>5</number>
+         <number>6</number>
         </property>
         <property name="tabsClosable">
          <bool>false</bool>
@@ -563,38 +563,6 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_9">
-             <item row="0" column="0" colspan="4">
-              <widget class="QGroupBox" name="L_Details_Group">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">#L_Details_Group{color: rgb(255, 255, 255);}</string>
-               </property>
-               <property name="title">
-                <string>Summoner Info</string>
-               </property>
-               <layout class="QGridLayout" name="gridLayout_10">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="sumonerIcon_Lbl">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-                  </property>
-                  <property name="margin">
-                   <number>-3</number>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="sumoner_Profile_ID">
                <property name="font">
@@ -651,6 +619,9 @@
                </item>
               </widget>
              </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="apiKeyEdit"/>
+             </item>
              <item row="2" column="0">
               <widget class="QLabel" name="apiKeyLbl">
                <property name="font">
@@ -667,9 +638,6 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="apiKeyEdit"/>
-             </item>
              <item row="2" column="2" colspan="2">
               <widget class="QPushButton" name="setApiButton">
                <property name="text">
@@ -677,7 +645,62 @@
                </property>
               </widget>
              </item>
+             <item row="0" column="0" colspan="4">
+              <widget class="QGroupBox" name="L_Details_Group">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#L_Details_Group{color: rgb(255, 255, 255);}</string>
+               </property>
+               <property name="title">
+                <string>Summoner Info</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_10">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="sumonerIcon_Lbl">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                  </property>
+                  <property name="margin">
+                   <number>-3</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
             </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_6">
+         <attribute name="title">
+          <string>Debug Console(API)</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="1" column="0">
+           <widget class="QTextBrowser" name="apiDebugView"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>This is the raw data that is coming from all the API's you are currently connected to.</string>
+            </property>
            </widget>
           </item>
          </layout>
