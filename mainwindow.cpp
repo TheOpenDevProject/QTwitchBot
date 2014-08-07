@@ -397,3 +397,17 @@ void MainWindow::riotAPI_NewData(QByteArray data)
     thePix.setDevicePixelRatio(1.5);
     ui->sumonerIcon_Lbl->setPixmap(thePix);
 }
+
+void MainWindow::on_setApiButton_clicked()
+{
+    QMessageBox warning;
+    warning.setText("Warning: KEEP YOUR API KEY PRIVATE AT ALL TIMES TO PREVENT OTHERS USING UP ALL YOUR ALLOWANCE FROM RIOT GAMES");
+    warning.exec();
+    if(ui->apiKeyEdit->text().isEmpty() || ui->apiKeyEdit->text().size() < 36 || ui->apiKeyEdit->text().size() > 36){
+        warning.setText("API Key Is Invalid - Must be at least 36 characters long");
+        warning.exec();
+    }else{
+          riot_api.setAPIKey(ui->apiKeyEdit->text());
+    }
+
+}

@@ -81,6 +81,8 @@ private slots:
 
    void on_pushButton_15_clicked();
 void riotAPI_NewData(QByteArray data);
+void on_setApiButton_clicked();
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;
