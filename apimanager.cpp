@@ -1,6 +1,6 @@
 #include "apimanager.h"
 #include <QDebug>
-
+//The-Sprinter Branch Maker
 RiotAPI::RiotAPI(QObject *parent):
     QObject(parent)
 {
