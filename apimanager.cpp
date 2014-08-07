@@ -33,9 +33,3 @@ void RiotAPI::requestSummonerIcon(QString summoner_name){
     qnam->get(QNetworkRequest(QUrl("http://avatar.leagueoflegends.com/OC1/" + summoner_name + ".png")));
 }
 */
-
-
-void LeagueRankedInfo::requestBasicProfile(QString summoner_id)
-{
-    qnam->get(QNetworkRequest(QUrl("https://oce.api.pvp.net/api/lol/oce/v1.4/summoner/by-name/"+  summoner_id +"?api_key=" + riotAPI_Key)));
-}

@@ -36,28 +36,4 @@ public slots:
 void replyFinished(QNetworkReply*);
 };
 
-/////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-class LeagueRankedInfo :public RiotAPI
-{
-    Q_OBJECT
-public:
-QString getDivision(){return division;}
-QString getLP(){return leaguePoints;}
-QString getWins(){return wins;}
-QString getTier(){return tier;}
-QString getIsHotStreak(){return isHotStreak;}
-QString getRankedSoloGamesPlayed(){return rankedSoloGamesPlayed;}
-void requestBasicProfile(QString summoner_id);
-private:
-
-protected:
-QString tier;
-QString division;
-QString isHotStreak;
-QString wins;
-QString rankedSoloGamesPlayed;
-QString leaguePoints;
-};
-
 #endif // APIMANAGER_H
