@@ -17,7 +17,7 @@ void RiotAPI::requestBasicProfile(QString summoner_name){
     if(riotAPI_Key.isEmpty() || riotAPI_Key.size() < 36){
         qDebug() << "Riot API Key Is Not Valid";
     }else{
-        summonerName = summoner_name;
+        summonerName = summoner_name.toLower();
         qnam->get(QNetworkRequest(QUrl("https://oce.api.pvp.net/api/lol/oce/v1.4/summoner/by-name/"+ summoner_name +"?api_key=" + riotAPI_Key)));
     }
 
@@ -42,9 +42,15 @@ void RiotAPI::ParseAndSet(){
 
        //Get the root element of the basic summoner profile, Currently we can expect this to be the summoners name.
     const QJsonObject jObject = jdoc.object();
-    QJsonValue jVal = jObject.value("sumcoolaid");
-qDebug() << jVal;
+    QJsonValue jVal = jObject.value(summonerName);
+//qDebug() << jVal;
     QJsonObject playerDetails = jVal.toObject();
-    qDebug() << playerDetails.value(playerDetails.keys().at(0)).toString();
-
+    //Basic Summoner Profile values
+    QJsonValue playerID = playerDetails["id"];
+    QJsonValue playerServerName = playerDetails["name"];
+    QJsonValue playerProfileIconId = playerDetails["profileIconId"];
+    QJsonValue playerLevel = playerDetails["summonerLevel"];
+    //Now we just store these as members
+        summonerID = playerID.toVariant().toString();
+        summonerLevel = playerLevel.toVariant().toString();
 }

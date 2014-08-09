@@ -391,7 +391,8 @@ riot_api.requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 
 void MainWindow::riotAPI_BasicProfileUpdated(QByteArray data){
     ui->apiDebugView->append(data + "\n");
-
+ui->SummonerName_lbl->setText(riot_api.getSummonerName());
+ui->SummonerLevelLbl->setText(riot_api.getSummonerLevel());
 }
 
 void MainWindow::on_setApiButton_clicked()

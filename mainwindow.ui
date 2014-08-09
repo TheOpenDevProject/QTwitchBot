@@ -268,7 +268,7 @@
       <item row="4" column="1">
        <widget class="QTabWidget" name="InterfaceOps">
         <property name="currentIndex">
-         <number>6</number>
+         <number>5</number>
         </property>
         <property name="tabsClosable">
          <bool>false</bool>
@@ -661,16 +661,57 @@
                 <string>Summoner Info</string>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="sumonerIcon_Lbl">
+                <item row="0" column="1">
+                 <widget class="QLabel" name="SummonerName_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#SummonerName_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
                   <property name="alignment">
-                   <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                   </property>
                   <property name="margin">
-                   <number>-3</number>
+                   <number>0</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="summonerNamelbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#summonerNamelbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string>Summoner Name:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="summonerLevel_lbl">
+                  <property name="text">
+                   <string>Summoner Level</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="SummonerLevelLbl">
+                  <property name="text">
+                   <string>0</string>
                   </property>
                  </widget>
                 </item>
