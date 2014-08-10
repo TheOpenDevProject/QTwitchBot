@@ -34,6 +34,7 @@ public:
     MusicPlayer streamPlayer;
     scriptEdit *scriptEditor = new scriptEdit;
     RiotAPI *riot_api = new RiotAPI;
+    RiotAPI_RankedStats *riot_api_ranked = new RiotAPI_RankedStats;
      ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
@@ -44,6 +45,7 @@ public:
         delete t_commandList;
         delete scriptEditor;
         delete riot_api;
+        delete riot_api_ranked;
     }
 
 private slots:
@@ -81,7 +83,10 @@ private slots:
 
    void on_pushButton_15_clicked();
 void riotAPI_BasicProfileUpdated(QByteArray data);
+void riotAPI_RankedStatsUpdated(QByteArray data);
 void on_setApiButton_clicked();
+
+void on_actionPaypal_triggered();
 
 private:
        QStringList musicFiles;

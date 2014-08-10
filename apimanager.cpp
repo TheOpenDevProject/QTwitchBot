@@ -76,3 +76,47 @@ void RiotAPI::ParseAndSet(){
         summonerLevel = playerLevel.toVariant().toString();
         summonerProfileIcon = playerProfileIconId.toVariant().toString();
 }
+
+
+RiotAPI_RankedStats::RiotAPI_RankedStats(QObject *parent)
+{
+    connect(qnam,SIGNAL(finished(QNetworkReply*)),this,SLOT(replyFinished(QNetworkReply*)));
+}
+
+void RiotAPI_RankedStats::getRankedStats()
+{
+    if(riotAPI_Key.isEmpty() || riotAPI_Key.size() < 36){
+        qDebug() << "Riot API Key Is Not Valid";
+    }else{
+
+        qnam->get(QNetworkRequest(QUrl("https://oce.api.pvp.net/api/lol/oce/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
+    }
+}
+
+void RiotAPI_RankedStats::setSummonerID(QString s_id)
+{
+    summonerID = s_id;
+}
+
+void RiotAPI_RankedStats::ParseAndSet()
+{
+
+    QJsonParseError jerror;
+    QJsonDocument jdoc = QJsonDocument::fromJson(rawapidata,&jerror);
+    const QJsonObject jObject = jdoc.object();
+
+    QJsonValue jVal = jObject[summonerID].toArray();
+
+
+
+    //Access by key
+
+}
+
+void RiotAPI_RankedStats::replyFinished(QNetworkReply *reply){
+    QByteArray byteReply = reply->readAll();
+    rawapidata = byteReply;
+
+    ParseAndSet();
+    emit requestComplete(byteReply);
+}

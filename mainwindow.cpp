@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     themeManager.emplace_back(TeKeLiLi);
     themeManager.emplace_back(carbonToxic);
     connect(riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
+    connect(riot_api_ranked,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_RankedStatsUpdated(QByteArray)));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -394,7 +395,7 @@ void MainWindow::riotAPI_BasicProfileUpdated(QByteArray data){
     ui->apiDebugView->append(data + "\n");
 ui->SummonerName_lbl->setText(riot_api->getSummonerName());
 ui->SummonerLevelLbl->setText(riot_api->getSummonerLevel());
-
+riot_api_ranked->setSummonerID(riot_api->getSummonerID());
 }
 
 void MainWindow::on_setApiButton_clicked()
@@ -408,6 +409,16 @@ void MainWindow::on_setApiButton_clicked()
         ui->apiDebugView->append("RiotAPI - API Key Is Invalid - Must be 36 characters long\n");
     }else{
           riot_api->setAPIKey(ui->apiKeyEdit->text());
+          riot_api_ranked->setAPIKey(ui->apiKeyEdit->text());
     }
 
+}
+
+void MainWindow::riotAPI_RankedStatsUpdated(QByteArray data){
+    ui->apiDebugView->append(data + "\n");
+}
+
+void MainWindow::on_actionPaypal_triggered()
+{
+    riot_api_ranked->getRankedStats();
 }

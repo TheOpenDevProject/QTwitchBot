@@ -25,10 +25,11 @@ public:
   QString getSummonerLevel(){return summonerLevel;}
   QString getSummonerProfileIcon(){return summonerProfileIcon;}
   QString getAPIKey(){return riotAPI_Key;}
+
 private:
 QByteArray rawapidata;
 protected:
-    void ParseAndSet();
+    virtual void ParseAndSet();
     QString riotAPI_Key;
     QNetworkAccessManager *qnam = new QNetworkAccessManager(this);
     QString summonerName;
@@ -41,7 +42,34 @@ void requestComplete(QByteArray data);
 void requestComplete();
 public slots:
 
-void replyFinished(QNetworkReply*);
+virtual void replyFinished(QNetworkReply*);
+};
+
+class RiotAPI_RankedStats: public RiotAPI{
+Q_OBJECT
+public:
+    explicit RiotAPI_RankedStats(QObject *parent =0);
+    void getRankedStats();
+    void setSummonerID(QString s_id);
+    //Get Info
+    QString getTierName(){return tierName;}
+    QString getTier(){return tier;}
+    QString getDivision(){return division;}
+    QString getLeaguePoints(){return leaguePoints;}
+    QString getSoloWins(){return soloWins;}
+    QString getIsHotStreak(){return isHotStreak;}
+
+private:
+    QByteArray rawapidata;
+    //Ranked specific data
+    QString tierName,tier,division,leaguePoints,soloWins,isHotStreak;
+protected:
+    void ParseAndSet();
+
+signals:
+    void requestComplete(QByteArray data);
+public slots:
+    void replyFinished(QNetworkReply*);
 };
 
 #endif // APIMANAGER_H

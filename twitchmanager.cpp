@@ -166,7 +166,6 @@ void twitchManager::commandHandler(QString streamInput){
                 sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
             }else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
                  sendMessage(r_api->getSummonerName()+ " is currently level: " +r_api->getSummonerLevel());
-
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();
