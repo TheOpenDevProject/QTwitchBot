@@ -33,7 +33,7 @@ public:
     TwitchCommandList *t_commandList = new TwitchCommandList;
     MusicPlayer streamPlayer;
     scriptEdit *scriptEditor = new scriptEdit;
-    RiotAPI riot_api;
+    RiotAPI *riot_api = new RiotAPI;
      ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
@@ -43,7 +43,7 @@ public:
         delete t_manager;
         delete t_commandList;
         delete scriptEditor;
-
+        delete riot_api;
     }
 
 private slots:

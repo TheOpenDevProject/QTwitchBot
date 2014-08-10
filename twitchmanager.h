@@ -11,6 +11,7 @@
 #include <QMap>
 #include <QTimer>
 #include "musicplayer.h"
+#include "apimanager.h"
 class twitchManager : public QObject
 {
     Q_OBJECT
@@ -27,6 +28,7 @@ public:
     QTimer *updateCommandRate = new QTimer(this);
     void setMusicPlayer(MusicPlayer *p_m_player);
     int getCommandRate();
+    RiotAPI *r_api;
 signals:
 
 

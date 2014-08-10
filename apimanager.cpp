@@ -9,6 +9,14 @@ RiotAPI::RiotAPI(QObject *parent):
 
 void RiotAPI::replyFinished(QNetworkReply *reply){
     QByteArray byteReply = reply->readAll();
+    //This is probably our Summoner profile icon, Either way its a PNG.
+    if(byteReply.startsWith("137 80 78 71 13 10 26 10")){
+        summonerProfilePixmap.loadFromData(byteReply);
+        //Emmit the signal that the data has finished
+        emit requestComplete();
+        return;
+    }
+    //Otherwise treat the data as JSON
     rawapidata = byteReply;
     ParseAndSet();
     emit requestComplete(byteReply);
@@ -23,13 +31,26 @@ void RiotAPI::requestBasicProfile(QString summoner_name){
 
 }
 
+void RiotAPI::requestSummonerIcon(QString summoner_name)
+{
+    if(summoner_name.isEmpty()){
+        qDebug() << "Summoner name must be provided";
+    }else {
+       qnam->get(QNetworkRequest(QUrl("http://avatar.leagueoflegends.com/oce/" + summoner_name + ".png")));
+    }
+}
+
 void RiotAPI::setAPIKey(QString riotAPIKey)
 {
     riotAPI_Key = riotAPIKey;
 }
 
 void RiotAPI::ParseAndSet(){
-
+    //First 8 bytes of a png image are 137 80 78 71 13 10 26 10 (ref:libpng.org)
+        if(rawapidata.startsWith("137 80 78 71 13 10 26 10")){
+            qDebug() << "Data is a PNG file (Parse not available)";
+            return;
+        }
     //Each state considered critical to valid data can cause a break in the function because, proceeding with an error would be useless.
     if(rawapidata.isEmpty()){
         qDebug() << "Basic profile no json data found";
@@ -53,4 +74,5 @@ void RiotAPI::ParseAndSet(){
     //Now we just store these as members
         summonerID = playerID.toVariant().toString();
         summonerLevel = playerLevel.toVariant().toString();
+        summonerProfileIcon = playerProfileIconId.toVariant().toString();
 }

@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
+        t_manager->r_api = riot_api;
     ///////////////////////////////////////////////////////
     // Theme Manger V.10              //
     //////////////////////////////////////////////////////
@@ -22,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     themeManager.emplace_back(cartoonDark);
     themeManager.emplace_back(TeKeLiLi);
     themeManager.emplace_back(carbonToxic);
-    connect(&riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
+    connect(riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -385,14 +386,15 @@ void MainWindow::on_actionReload_Current_TBS_triggered()
 
 void MainWindow::on_pushButton_15_clicked()
 {
-riot_api.requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
+riot_api->requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 
 }
 
 void MainWindow::riotAPI_BasicProfileUpdated(QByteArray data){
     ui->apiDebugView->append(data + "\n");
-ui->SummonerName_lbl->setText(riot_api.getSummonerName());
-ui->SummonerLevelLbl->setText(riot_api.getSummonerLevel());
+ui->SummonerName_lbl->setText(riot_api->getSummonerName());
+ui->SummonerLevelLbl->setText(riot_api->getSummonerLevel());
+
 }
 
 void MainWindow::on_setApiButton_clicked()
@@ -405,7 +407,7 @@ void MainWindow::on_setApiButton_clicked()
         warning.exec();
         ui->apiDebugView->append("RiotAPI - API Key Is Invalid - Must be 36 characters long\n");
     }else{
-          riot_api.setAPIKey(ui->apiKeyEdit->text());
+          riot_api->setAPIKey(ui->apiKeyEdit->text());
     }
 
 }

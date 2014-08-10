@@ -9,6 +9,7 @@
 #include <QJsonValue>
 #include <QJsonParseError>
 #include <QJsonArray>
+#include <QPixmap>
 //This defines the most basic class for a Riot API Request and should be used to instansiate all other members
 class RiotAPI : public QObject
 {
@@ -16,7 +17,9 @@ class RiotAPI : public QObject
 public:
     explicit RiotAPI(QObject *parent = 0);
     void requestBasicProfile(QString summoner_name);
+    void requestSummonerIcon(QString summoner_name);
   void setAPIKey(QString riotAPIKey);
+  QPixmap getSummonerProfilePixmap(){return summonerProfilePixmap;}
   QString getSummonerID(){return summonerID;}
   QString getSummonerName(){return summonerName;}
   QString getSummonerLevel(){return summonerLevel;}
@@ -32,10 +35,10 @@ protected:
     QString summonerID;
     QString summonerLevel;
     QString summonerProfileIcon;
-
+    QPixmap summonerProfilePixmap;
 signals:
 void requestComplete(QByteArray data);
-
+void requestComplete();
 public slots:
 
 void replyFinished(QNetworkReply*);
