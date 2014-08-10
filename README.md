@@ -25,6 +25,8 @@ the format looks like this
 	[nextSong] = Plays next song in loaded playlist
 	[prevSong] = Plays previous song in loaded playlist
 	[whatNext] = What is the next song playing, sends this out to the stream
+	[Riot::getSummonerLevel] = using the Riot Games API get your summoner level
+	[Riot::getRankedSummary] = using the Riot Games API get your current division/lp
 	A special command is created like so...
 	!command,[special]
 
