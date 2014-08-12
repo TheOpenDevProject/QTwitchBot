@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/core">
         <file>res/twitchBotIcon.png</file>
-        <file>res/riot_asset_1.png</file>
         <file>res/gtk_refresh.png</file>
+        <file>res/LeagueOfAPI.png</file>
+        <file>res/RiotAPIWallpaper.jpg</file>
     </qresource>
     <qresource prefix="/themes">
         <file>res/cartoonDark/cartoon-dark-bng.jpg</file>
