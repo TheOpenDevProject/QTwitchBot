@@ -563,88 +563,6 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout_9">
-             <item row="1" column="0">
-              <widget class="QLabel" name="sumoner_Profile_ID">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="autoFillBackground">
-                <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">#sumoner_Profile_ID{color: rgb(255, 255, 255);}</string>
-               </property>
-               <property name="text">
-                <string>Enter Summoner ID</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QPushButton" name="pushButton_15">
-               <property name="text">
-                <string>Get Profile</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="summoner_ID_Entry"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QComboBox" name="L_region_Select">
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
-               </property>
-               <item>
-                <property name="text">
-                 <string>OCE</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>NA</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>KR</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>EUW</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="apiKeyEdit"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="apiKeyLbl">
-               <property name="font">
-                <font>
-                 <weight>75</weight>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">#apiKeyLbl{color: rgb(255, 255, 255);}</string>
-               </property>
-               <property name="text">
-                <string>Set API Key</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2" colspan="2">
-              <widget class="QPushButton" name="setApiButton">
-               <property name="text">
-                <string>Set API Key</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0" colspan="4">
               <widget class="QGroupBox" name="L_Details_Group">
                <property name="font">
@@ -661,6 +579,84 @@
                 <string>Summoner Info</string>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
+                <item row="2" column="0">
+                 <widget class="QLabel" name="summonerLevel_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#summonerLevel_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string>Summoner Level:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="SummonerLevelLbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#SummonerLevelLbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="summonerIcon_lbl">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="summoner_Tier_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#summoner_Tier_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string>Current Tier:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QLabel" name="_summoner_Tier_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#_summoner_Tier_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
                 <item row="1" column="1">
                  <widget class="QLabel" name="SummonerName_lbl">
                   <property name="font">
@@ -701,8 +697,8 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="summonerLevel_lbl">
+                <item row="4" column="0">
+                 <widget class="QLabel" name="current_division_lbl">
                   <property name="font">
                    <font>
                     <pointsize>12</pointsize>
@@ -711,15 +707,15 @@
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">#summonerLevel_lbl{color: rgb(255, 255, 255);}</string>
+                   <string notr="true">#current_division_lbl{color: rgb(255, 255, 255);}</string>
                   </property>
                   <property name="text">
-                   <string>Summoner Level:</string>
+                   <string>Current Division:</string>
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QLabel" name="SummonerLevelLbl">
+                <item row="5" column="1">
+                 <widget class="QLabel" name="_current_lp_lbl">
                   <property name="font">
                    <font>
                     <pointsize>12</pointsize>
@@ -728,38 +724,176 @@
                    </font>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">#SummonerLevelLbl{color: rgb(255, 255, 255);}</string>
+                   <string notr="true">#_current_lp_lbl{color: rgb(255, 255, 255);}</string>
                   </property>
-                  <property name="text">
-                   <string>0</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="summonerIcon_lbl">
                   <property name="text">
                    <string/>
                   </property>
-                  <property name="scaledContents">
-                   <bool>true</bool>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QLabel" name="_current_division_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">#_current_division_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="summoner_Tier_lbl">
-                  <property name="text">
-                   <string>Current Tier</string>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="current_lp_lbl">
+                  <property name="font">
+                   <font>
+                    <pointsize>12</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
                   </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLabel" name="_summoner_Tier_lbl">
+                  <property name="styleSheet">
+                   <string notr="true">#current_lp_lbl{color: rgb(255, 255, 255);}</string>
+                  </property>
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>Current League Points(LP):</string>
                   </property>
                  </widget>
                 </item>
                </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="sumoner_Profile_ID">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#sumoner_Profile_ID{color: rgb(255, 255, 255);}</string>
+               </property>
+               <property name="text">
+                <string>Enter Summoner ID</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QPushButton" name="pushButton_15">
+               <property name="text">
+                <string>Get Profile</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="summoner_ID_Entry"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QComboBox" name="L_region_Select">
+               <property name="sizeAdjustPolicy">
+                <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+               </property>
+               <item>
+                <property name="text">
+                 <string>oce</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>na</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>kr</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>euw</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>br</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>las</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>lan</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>tr</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>ru</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="apiKeyEdit"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="apiKeyLbl">
+               <property name="font">
+                <font>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">#apiKeyLbl{color: rgb(255, 255, 255);}</string>
+               </property>
+               <property name="text">
+                <string>Set API Key</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2" colspan="2">
+              <widget class="QPushButton" name="setApiButton">
+               <property name="text">
+                <string>Set API Key</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2" colspan="2">
+              <widget class="QPushButton" name="riot_sync_bttn">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>This will syncronise your stats from the Riot Games server with the bot</string>
+               </property>
+               <property name="whatsThis">
+                <string/>
+               </property>
+               <property name="text">
+                <string>Update Stats</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normalon>:/core/res/gtk_refresh.png</normalon>
+                </iconset>
+               </property>
               </widget>
              </item>
             </layout>

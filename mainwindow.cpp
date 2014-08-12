@@ -11,7 +11,10 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
     streamMonitor.show();
     streamMonitor.setTwitchManager(t_manager);
+      //This is a fairly hacky approach to accessing data from our API managers...
         t_manager->r_api = riot_api;
+        t_manager->ranked_api = riot_api_ranked;
+        //In this patch BETA 3.0 no nullptr checks are done, be very careful about deleting this before the end of the programs life.
     ///////////////////////////////////////////////////////
     // Theme Manger V.10              //
     //////////////////////////////////////////////////////
@@ -392,10 +395,14 @@ riot_api->requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 }
 
 void MainWindow::riotAPI_BasicProfileUpdated(QByteArray data){
+//This is considered a full flush of the stats.
     ui->apiDebugView->append(data + "\n");
 ui->SummonerName_lbl->setText(riot_api->getSummonerName());
 ui->SummonerLevelLbl->setText(riot_api->getSummonerLevel());
 riot_api_ranked->setSummonerID(riot_api->getSummonerID());
+ui->riot_sync_bttn->setEnabled(true);
+riot_api_ranked->getRankedStats();
+
 }
 
 void MainWindow::on_setApiButton_clicked()
@@ -416,9 +423,26 @@ void MainWindow::on_setApiButton_clicked()
 
 void MainWindow::riotAPI_RankedStatsUpdated(QByteArray data){
     ui->apiDebugView->append(data + "\n");
+    ui->_current_lp_lbl->setText(riot_api_ranked->getLeaguePoints());
+    ui->_current_division_lbl->setText(riot_api_ranked->getDivision());
+    ui->_summoner_Tier_lbl->setText(riot_api_ranked->getTier());
+
 }
 
 void MainWindow::on_actionPaypal_triggered()
 {
+
+}
+
+void MainWindow::on_riot_sync_bttn_clicked()
+{
+    //Just need to poll the ranked API and refresh stats
     riot_api_ranked->getRankedStats();
+}
+
+void MainWindow::on_L_region_Select_currentIndexChanged(const QString &arg1)
+{
+    qDebug() << arg1;
+    riot_api->setSummonerRegion(arg1);
+    riot_api_ranked->setSummonerRegion(arg1);
 }

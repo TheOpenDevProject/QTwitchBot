@@ -5,6 +5,7 @@ RiotAPI::RiotAPI(QObject *parent):
     QObject(parent)
 {
     connect(qnam,SIGNAL(finished(QNetworkReply*)),this,SLOT(replyFinished(QNetworkReply*)),Qt::UniqueConnection);
+    summonerRegion = "oce"; //OCE is TwitchBot's default region because OCE is the bomb
 }
 
 void RiotAPI::replyFinished(QNetworkReply *reply){
@@ -26,7 +27,7 @@ void RiotAPI::requestBasicProfile(QString summoner_name){
         qDebug() << "Riot API Key Is Not Valid";
     }else{
         summonerName = summoner_name.toLower();
-        qnam->get(QNetworkRequest(QUrl("https://oce.api.pvp.net/api/lol/oce/v1.4/summoner/by-name/"+ summoner_name +"?api_key=" + riotAPI_Key)));
+        qnam->get(QNetworkRequest(QUrl("https://"+ summonerRegion + ".api.pvp.net/api/lol/"+ summonerRegion +"/v1.4/summoner/by-name/"+ summoner_name +"?api_key=" + riotAPI_Key)));
     }
 
 }
@@ -43,6 +44,11 @@ void RiotAPI::requestSummonerIcon(QString summoner_name)
 void RiotAPI::setAPIKey(QString riotAPIKey)
 {
     riotAPI_Key = riotAPIKey;
+}
+
+void RiotAPI::setSummonerRegion(QString region)
+{
+    summonerRegion = region;
 }
 
 void RiotAPI::ParseAndSet(){
@@ -86,11 +92,12 @@ RiotAPI_RankedStats::RiotAPI_RankedStats(QObject *parent)
 
 void RiotAPI_RankedStats::getRankedStats()
 {
+    qDebug() << summonerRegion;
     if(riotAPI_Key.isEmpty() || riotAPI_Key.size() < 36){
         qDebug() << "Riot API Key Is Not Valid";
     }else{
 
-        qnam->get(QNetworkRequest(QUrl("https://oce.api.pvp.net/api/lol/oce/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
+        qnam->get(QNetworkRequest(QUrl("https://" + summonerRegion + ".api.pvp.net/api/lol/" + summonerRegion + "/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
     }
 }
 

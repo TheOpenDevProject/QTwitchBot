@@ -88,6 +88,10 @@ void on_setApiButton_clicked();
 
 void on_actionPaypal_triggered();
 
+void on_riot_sync_bttn_clicked();
+
+void on_L_region_Select_currentIndexChanged(const QString &arg1);
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;

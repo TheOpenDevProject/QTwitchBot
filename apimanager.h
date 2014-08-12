@@ -19,13 +19,14 @@ public:
     void requestBasicProfile(QString summoner_name);
     void requestSummonerIcon(QString summoner_name);
   void setAPIKey(QString riotAPIKey);
+  void setSummonerRegion(QString region);
   QPixmap getSummonerProfilePixmap(){return summonerProfilePixmap;}
   QString getSummonerID(){return summonerID;}
   QString getSummonerName(){return summonerName;}
   QString getSummonerLevel(){return summonerLevel;}
   QString getSummonerProfileIcon(){return summonerProfileIcon;}
   QString getAPIKey(){return riotAPI_Key;}
-
+    QString getSummonerRegion(){return summonerRegion;}
 private:
 QByteArray rawapidata;
 protected:
@@ -36,6 +37,7 @@ protected:
     QString summonerID;
     QString summonerLevel;
     QString summonerProfileIcon;
+    QString summonerRegion;
     QPixmap summonerProfilePixmap;
 signals:
 void requestComplete(QByteArray data);

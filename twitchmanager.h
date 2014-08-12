@@ -29,6 +29,7 @@ public:
     void setMusicPlayer(MusicPlayer *p_m_player);
     int getCommandRate();
     RiotAPI *r_api;
+    RiotAPI_RankedStats *ranked_api;
 signals:
 
 
