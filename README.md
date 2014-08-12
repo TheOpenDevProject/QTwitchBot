@@ -27,6 +27,7 @@ the format looks like this
 	[whatNext] = What is the next song playing, sends this out to the stream
 	[Riot::getSummonerLevel] = using the Riot Games API get your summoner level
 	[Riot::getRankedSummary] = using the Riot Games API get your current division/lp
+	[Riot::getWinStreakStatus] = using the Riot Games API, returns if you are on a hot streak(3 win streak)
 	A special command is created like so...
 	!command,[special]
 
