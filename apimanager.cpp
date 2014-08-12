@@ -4,7 +4,7 @@
 RiotAPI::RiotAPI(QObject *parent):
     QObject(parent)
 {
-    connect(qnam,SIGNAL(finished(QNetworkReply*)),this,SLOT(replyFinished(QNetworkReply*)));
+    connect(qnam,SIGNAL(finished(QNetworkReply*)),this,SLOT(replyFinished(QNetworkReply*)),Qt::UniqueConnection);
 }
 
 void RiotAPI::replyFinished(QNetworkReply *reply){
@@ -80,7 +80,8 @@ void RiotAPI::ParseAndSet(){
 
 RiotAPI_RankedStats::RiotAPI_RankedStats(QObject *parent)
 {
-    connect(qnam,SIGNAL(finished(QNetworkReply*)),this,SLOT(replyFinished(QNetworkReply*)));
+//BUG-Fix - Class inherits RiotAPI contructor...
+
 }
 
 void RiotAPI_RankedStats::getRankedStats()
@@ -104,13 +105,26 @@ void RiotAPI_RankedStats::ParseAndSet()
     QJsonParseError jerror;
     QJsonDocument jdoc = QJsonDocument::fromJson(rawapidata,&jerror);
     const QJsonObject jObject = jdoc.object();
-     QJsonArray playerArray = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray();
-     QJsonArray playerDataArray = playerArray[0].toArray();
-     QJsonValue playerLP = playerDataArray[0];
-     qDebug() << playerLP;
+    //Current LP
+    leaguePoints = QString::number(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["leaguePoints"].toInt());
+    //Current Division
+    division = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["division"].toString();
+    //Is player on a win streak
+             if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
+              isHotStreak = "On A Win Streak";
+                   }else{
+              isHotStreak = "Not On A Win Streak";
+                     }
+    //Current Tier
+     tier = jdoc.object()[summonerID].toArray()[0].toObject()["tier"].toString();
 
 
-    //Access by key
+    //Developer Debug Info
+
+             qDebug() << "Summoner is currently on: " << getLeaguePoints() << "LP";
+             qDebug() << "Summoner's Division is:" << getDivision();
+             qDebug() << "Summoner is currently " << getIsHotStreak();
+             qDebug() << "Summoner is currently " << getTier() << "Tier";
 
 }
 
