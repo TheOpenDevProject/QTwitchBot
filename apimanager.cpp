@@ -104,9 +104,10 @@ void RiotAPI_RankedStats::ParseAndSet()
     QJsonParseError jerror;
     QJsonDocument jdoc = QJsonDocument::fromJson(rawapidata,&jerror);
     const QJsonObject jObject = jdoc.object();
-
-    QJsonValue jVal = jObject[summonerID].toArray();
-
+     QJsonArray playerArray = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray();
+     QJsonArray playerDataArray = playerArray[0].toArray();
+     QJsonValue playerLP = playerDataArray[0];
+     qDebug() << playerLP;
 
 
     //Access by key
