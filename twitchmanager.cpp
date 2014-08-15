@@ -171,7 +171,7 @@ void twitchManager::commandHandler(QString streamInput){
                 //#15
                 sendMessage(r_api->getSummonerName() + " Is currently " + ranked_api->getTier() + " " + ranked_api->getDivision() + " " + ranked_api->getLeaguePoints() + "LP");
             }else if(map_ittr.value() == "[Riot::getWinStreakStatus]\r\n" ||  map_ittr.value() == "[Riot::getWinStreakStatus]"){
-             sendMessage(r_api->getSummonerName() + " " + ranked_api->getIsHotStreak());
+             sendMessage(r_api->getSummonerName() + "  " + ranked_api->getIsHotStreak());
             }else{
             sendMessage(map_ittr.value());
             qDebug() << map_ittr.value();

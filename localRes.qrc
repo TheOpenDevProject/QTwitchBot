@@ -3,6 +3,8 @@
         <file>res/twitchBotIcon.png</file>
         <file>res/riot_asset_1.png</file>
         <file>res/gtk_refresh.png</file>
+        <file>res/bg_event_poolpartyziggs_1920x1080.jpg</file>
+        <file>res/LeagueOfAPI.png</file>
     </qresource>
     <qresource prefix="/themes">
         <file>res/cartoonDark/cartoon-dark-bng.jpg</file>

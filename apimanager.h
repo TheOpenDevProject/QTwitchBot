@@ -51,6 +51,7 @@ class RiotAPI_RankedStats: public RiotAPI{
 Q_OBJECT
 public:
     explicit RiotAPI_RankedStats(QObject *parent =0);
+    //Function call to get the data from the API
     void getRankedStats();
     void setSummonerID(QString s_id);
     //Get Info
@@ -60,11 +61,14 @@ public:
     QString getLeaguePoints(){return leaguePoints;}
     QString getSoloWins(){return soloWins;}
     QString getIsHotStreak(){return isHotStreak;}
+    //This function should not be used to return data out to the stream (Why would be want to return a boolean value to the end user: See getIsHotStreak())
+    bool getIsHotStreak_b(){return b_isHotStreak;} //Because the data is in the API template specialisation is not a good option
 
 private:
     QByteArray rawapidata;
     //Ranked specific data
     QString tierName,tier,division,leaguePoints,soloWins,isHotStreak;
+    bool b_isHotStreak;
 protected:
     void ParseAndSet();
 

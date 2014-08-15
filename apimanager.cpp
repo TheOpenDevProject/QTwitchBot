@@ -65,18 +65,18 @@ void RiotAPI::ParseAndSet(){
 
     //We have data, Proceed with JSON specific validation + loading document
         QJsonParseError jerror;
-        QJsonDocument jdoc  = QJsonDocument::fromJson(rawapidata,&jerror);
+            QJsonDocument jdoc  = QJsonDocument::fromJson(rawapidata,&jerror);
 
        //Get the root element of the basic summoner profile, Currently we can expect this to be the summoners name.
     const QJsonObject jObject = jdoc.object();
-    QJsonValue jVal = jObject.value(summonerName);
-//qDebug() << jVal;
-    QJsonObject playerDetails = jVal.toObject();
-    //Basic Summoner Profile values
-    QJsonValue playerID = playerDetails["id"];
-    QJsonValue playerServerName = playerDetails["name"];
-    QJsonValue playerProfileIconId = playerDetails["profileIconId"];
-    QJsonValue playerLevel = playerDetails["summonerLevel"];
+         QJsonValue jVal = jObject.value(summonerName);
+
+         QJsonObject playerDetails = jVal.toObject();
+      //Basic Summoner Profile values
+         QJsonValue playerID = playerDetails["id"];
+          QJsonValue playerServerName = playerDetails["name"];
+             QJsonValue playerProfileIconId = playerDetails["profileIconId"];
+              QJsonValue playerLevel = playerDetails["summonerLevel"];
     //Now we just store these as members
         summonerID = playerID.toVariant().toString();
         summonerLevel = playerLevel.toVariant().toString();
@@ -103,7 +103,12 @@ void RiotAPI_RankedStats::getRankedStats()
 
 void RiotAPI_RankedStats::setSummonerID(QString s_id)
 {
+    if(s_id.isEmpty() || s_id.size() < 8){
+        qDebug() << "Invalid Summoner ID";
+    }else{
     summonerID = s_id;
+    }
+
 }
 
 void RiotAPI_RankedStats::ParseAndSet()
@@ -117,13 +122,13 @@ void RiotAPI_RankedStats::ParseAndSet()
     //Current Division
     division = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["division"].toString();
     //Is player on a win streak
-             if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
-              isHotStreak = "Is On A Hot Streak";
-              b_isHotStreak = true;
-                   }else{
-              isHotStreak = "Is Not On A Win Streak :(";
-              b_isHotStreak = true;
-                     }
+     if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
+         isHotStreak = "Is On A Hot Streak";
+         b_isHotStreak = true;
+      }else{
+         isHotStreak = "Is Not On A Win Streak :(";
+         b_isHotStreak = false;
+        }
     //Current Tier
      tier = jdoc.object()[summonerID].toArray()[0].toObject()["tier"].toString();
 
@@ -132,6 +137,7 @@ void RiotAPI_RankedStats::ParseAndSet()
 
              qDebug() << "Summoner is currently on: " << getLeaguePoints() << "LP";
              qDebug() << "Summoner's Division is:" << getDivision();
+
              qDebug() << "Summoner is currently " << getIsHotStreak();
              qDebug() << "Summoner is currently " << getTier() << "Tier";
 
