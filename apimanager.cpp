@@ -118,9 +118,11 @@ void RiotAPI_RankedStats::ParseAndSet()
     division = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["division"].toString();
     //Is player on a win streak
              if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
-              isHotStreak = "On A Win Streak";
+              isHotStreak = "Is On A Hot Streak";
+              b_isHotStreak = true;
                    }else{
-              isHotStreak = "Not On A Win Streak";
+              isHotStreak = "Is Not On A Win Streak :(";
+              b_isHotStreak = true;
                      }
     //Current Tier
      tier = jdoc.object()[summonerID].toArray()[0].toObject()["tier"].toString();
