@@ -96,19 +96,18 @@ void RiotAPI_RankedStats::getRankedStats()
     if(riotAPI_Key.isEmpty() || riotAPI_Key.size() < 36){
         qDebug() << "Riot API Key Is Not Valid";
     }else{
-
-        qnam->get(QNetworkRequest(QUrl("https://" + summonerRegion + ".api.pvp.net/api/lol/" + summonerRegion + "/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
+        QNetworkRequest rankedAPIEndpoint;
+        rankedAPIEndpoint.setRawHeader(QByteArray("Accept-Language"),QByteArray("en-US"));
+        rankedAPIEndpoint.setRawHeader(QByteArray("Accept-Charset"),QByteArray("ISO-8859-1,utf-8"));
+        rankedAPIEndpoint.setRawHeader(QByteArray("Origin"),QByteArray("TwitchBot"));
+        rankedAPIEndpoint.setUrl("https://" + summonerRegion + ".api.pvp.net/api/lol/" + summonerRegion + "/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key);
+        qnam->get(rankedAPIEndpoint);
     }
 }
 
 void RiotAPI_RankedStats::setSummonerID(QString s_id)
 {
-    if(s_id.isEmpty() || s_id.size() < 8){
-        qDebug() << "Invalid Summoner ID";
-    }else{
     summonerID = s_id;
-    }
-
 }
 
 void RiotAPI_RankedStats::ParseAndSet()
