@@ -1,0 +1,10 @@
+#ifndef TWITCHJSONAPIAMANGER_H
+#define TWITCHJSONAPIAMANGER_H
+
+class TwitchJSONAPIAManger
+{
+public:
+    TwitchJSONAPIAManger();
+};
+
+#endif // TWITCHJSONAPIAMANGER_H

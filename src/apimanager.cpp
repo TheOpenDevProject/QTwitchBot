@@ -97,7 +97,7 @@ void RiotAPI_RankedStats::getRankedStats()
         qDebug() << "Riot API Key Is Not Valid";
     }else{
 
-        qnam->get(QNetworkRequest(QUrl("https://" + summonerRegion + ".api.pvp.net/api/lol/" + summonerRegion + "/v2.4/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
+        qnam->get(QNetworkRequest(QUrl("https://" + summonerRegion + ".api.pvp.net/api/lol/" + summonerRegion + "/v2.5/league/by-summoner/"+ summonerID +"/entry?api_key=" + riotAPI_Key)));
     }
 }
 

@@ -1,0 +1,17 @@
+#ifndef TWITCHJSONAPIAMANGER_H
+#define TWITCHJSONAPIAMANGER_H
+#include <QObject>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonParseError>
+#include <QJsonArray>
+class TwitchJSONAPIAManger
+{
+public:
+    TwitchJSONAPIAManger();
+};
+
+#endif // TWITCHJSONAPIAMANGER_H

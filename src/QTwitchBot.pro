@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     musicplayer.cpp \
     popupdisplaywindow.cpp \
     scriptedit.cpp \
-    apimanager.cpp
+    apimanager.cpp \
+    twitchjsonapiamanger.cpp
 
 HEADERS  += mainwindow.h \
     monitor.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     musicplayer.h \
     popupdisplaywindow.h \
     scriptedit.h \
-    apimanager.h
+    apimanager.h \
+    twitchjsonapiamanger.h
 
 FORMS    += mainwindow.ui \
     monitor.ui \

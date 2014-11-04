@@ -45,7 +45,7 @@ void MainWindow::on_pushButton_clicked()
         //Set stream webkit view to streamers name
 
     ui->streamView->load(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout"));
-   ui->chatFeed->setUrl(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/chat?popout="));
+
 
 }
 
