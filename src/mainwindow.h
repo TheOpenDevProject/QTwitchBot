@@ -18,6 +18,7 @@
 #include "popupdisplaywindow.h"
 #include <memory>
 #include <apimanager.h>
+#include "twitchjsonapiamanger.h"
 namespace Ui {
 class MainWindow;
 }
@@ -35,6 +36,7 @@ public:
     scriptEdit *scriptEditor = new scriptEdit;
     RiotAPI *riot_api = new RiotAPI;
     RiotAPI_RankedStats *riot_api_ranked = new RiotAPI_RankedStats;
+    TwitchJSONAPIAManger TwitchChatManager;
      ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
@@ -84,6 +86,7 @@ private slots:
    void on_pushButton_15_clicked();
 void riotAPI_BasicProfileUpdated(QByteArray data);
 void riotAPI_RankedStatsUpdated(QByteArray data);
+void twitchAPI_UpdateUserList();
 void on_setApiButton_clicked();
 
 void on_actionPaypal_triggered();
@@ -92,11 +95,17 @@ void on_riot_sync_bttn_clicked();
 
 void on_L_region_Select_currentIndexChanged(const QString &arg1);
 
+void on_pushButton_16_clicked();
+
+void on_pushButton_17_clicked();
+
 private:
        QStringList musicFiles;
        QStringListModel m_musicFiles;
     Ui::MainWindow *ui;
     QStringListModel commandKeys;
+    QStringListModel moderatorList;
+    QStringListModel viewershipList;
     std::vector<std::function<void()>> themeManager;
     //The scope of the pointer is this class
     std::vector<std::shared_ptr<popupDisplayWindow>> displayWindows; //All Popup display windows should be added into here
@@ -110,5 +119,7 @@ protected:
 
 
 };
+
+
 //Within this class we need to reimplement the ability to move the window around when a user clicks on the Form Widget
 #endif // MAINWINDOW_H

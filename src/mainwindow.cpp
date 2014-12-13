@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
       //This is a fairly hacky approach to accessing data from our API managers...
         t_manager->r_api = riot_api;
         t_manager->ranked_api = riot_api_ranked;
+        t_manager->tmiServices = &TwitchChatManager; // Fucking hell thats bad but fast...
         //In this patch BETA 3.0 no nullptr checks are done, be very careful about deleting this before the end of the programs life.
     ///////////////////////////////////////////////////////
     // Theme Manger V.10              //
@@ -28,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     themeManager.emplace_back(carbonToxic);
     connect(riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
     connect(riot_api_ranked,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_RankedStatsUpdated(QByteArray)));
+    connect(&TwitchChatManager,SIGNAL(dataRequestable()),this,SLOT(twitchAPI_UpdateUserList()));
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -429,6 +431,13 @@ void MainWindow::riotAPI_RankedStatsUpdated(QByteArray data){
 
 }
 
+void MainWindow::twitchAPI_UpdateUserList()
+{
+    qDebug() << "List Update Running";
+    ui->viewerList->clear();
+
+}
+
 void MainWindow::on_actionPaypal_triggered()
 {
 
@@ -445,4 +454,18 @@ void MainWindow::on_L_region_Select_currentIndexChanged(const QString &arg1)
     qDebug() << arg1;
     riot_api->setSummonerRegion(arg1);
     riot_api_ranked->setSummonerRegion(arg1);
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+    TwitchChatManager.makeRequest(ui->twitch_user->text());
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+    //This is bad, But because TMI doesn't respond fast enough with the whole list, we need to provide a way to refresh the local data anyway.
+    ui->viewerList->clear();
+    ui->moderatorList->clear();
+    ui->moderatorList->addItems(TwitchChatManager.getModerators());
+    ui->viewerList->addItems(TwitchChatManager.getUsers());
 }

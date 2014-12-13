@@ -12,6 +12,7 @@
 #include <QTimer>
 #include "musicplayer.h"
 #include "apimanager.h"
+#include "twitchjsonapiamanger.h"
 class twitchManager : public QObject
 {
     Q_OBJECT
@@ -30,6 +31,7 @@ public:
     int getCommandRate();
     RiotAPI *r_api;
     RiotAPI_RankedStats *ranked_api;
+    TwitchJSONAPIAManger *tmiServices;
 signals:
 
 

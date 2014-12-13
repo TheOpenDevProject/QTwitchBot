@@ -74,4 +74,13 @@ public slots:
     void replyFinished(QNetworkReply*);
 };
 
+class RiotAPI_InGameStats: public RiotAPI{
+    Q_OBJECT
+public:
+    explicit RiotAPI_InGameStats(QObject *parent = 0);
+    void getLastGameInfo();
+    void setSummonerID(QString s_id);
+
+};
+
 #endif // APIMANAGER_H

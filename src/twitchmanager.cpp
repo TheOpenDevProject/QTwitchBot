@@ -95,10 +95,6 @@ void twitchManager::connected(){
     channelJoin.append("\r\n");
     twitch_socket->write(channelJoin);
     twitch_socket->flush();
-    ////////////////////////////////////////////////////////////////////
-    //Get a list of moderators
-    ////////////////////////////////////////////////////////////////////
-   //getModeratorList();
 }
 
 void twitchManager::disconnected(){
@@ -151,6 +147,19 @@ void twitchManager::commandHandler(QString streamInput){
    QMapIterator<QString,QString> map_ittr(commandMap_kp);
     while(map_ittr.hasNext()){
         map_ittr.next();
+        if(map_ittr.key().at(0) == '[' && map_ittr.key().at(1) == 'M' && map_ittr.key().at(2) == ']'){
+
+                   QString keyNoFlag =  map_ittr.key();
+                   keyNoFlag.remove(0,2);
+
+                if(keyNoFlag == commandFound){
+                for(int i = 0; i < tmiServices->getModerators().size(); i++){
+                    if(streamInput.split("!",QString::SkipEmptyParts).first() == tmiServices->getModerators().at(i)){
+                        qDebug() << "Moderator Command Sent from Moderator";
+                        }
+                    }
+                }
+        }
         if(map_ittr.key() == commandFound){
             //This could be moved into a function pointer array if the list of functions get big
             //We need to deal with the end new line characters if they are present
