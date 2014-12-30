@@ -135,6 +135,15 @@ QString twitchManager::getCallingUser(QString rawIRCData)
     }
     return nicknameFound.captured();
 }
+bool twitchManager::isModerator(QString rawIRCData){
+    QString callingUser = getCallingUser(rawIRCData);
+    for(TwitchUser *e : tmiServices->getUserList()){
+        if(callingUser == e->getTwitchUsername() && e->getAccessLevel() > 1){
+            return true;
+        }
+    }
+return false;
+}
 
 void twitchManager::setCommandList(QMap<QString, QString> commandMap){
     commandMap_kp = commandMap;
@@ -149,7 +158,7 @@ void twitchManager::commandHandler(QString streamInput){
             twitch_socket->flush();
             qDebug() << "Pong Sent";
     }
-    getCallingUser(streamInput);
+
    commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
    commandMatchFound = commandExpression.match(streamInput);
    bool hasMatch = commandMatchFound.hasMatch();
@@ -160,32 +169,37 @@ void twitchManager::commandHandler(QString streamInput){
    QMapIterator<QString,QString> map_ittr(commandMap_kp);
     while(map_ittr.hasNext()){
         map_ittr.next();
+        if(map_ittr.key().startsWith("[M]") && !(isModerator(streamInput))){
+           messageHistory << "Non Moderator tried to call moderator command";
+           return;
+        }else{
+            if(map_ittr.key() == commandFound){
+                //This could be moved into a function pointer array if the list of functions get big
+                //We need to deal with the end new line characters if they are present
+                if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
+                    getTime();
+                }else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
+                randomNumber();
+                }else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
+                    m_player->nextSong();
+                }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
+                m_player->prevSong();
+                }else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
+                    sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
+                }else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
+                    //#14
+                     sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
+                }else if(map_ittr.value() == "[Riot::getRankedSummary]\r\n" ||  map_ittr.value() == "[Riot::getRankedSummary]"){
+                    //#15
+                    sendMessage(r_api->getSummonerName() + " Is currently " + ranked_api->getTier() + " " + ranked_api->getDivision() + " " + ranked_api->getLeaguePoints() + "LP");
+                }else{
+                sendMessage(map_ittr.value());
+                qDebug() << map_ittr.value();
+               }
 
-        if(map_ittr.key() == commandFound){
-            //This could be moved into a function pointer array if the list of functions get big
-            //We need to deal with the end new line characters if they are present
-            if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
-                getTime();
-            }else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
-            randomNumber();
-            }else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
-                m_player->nextSong();
-            }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
-            m_player->prevSong();
-            }else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
-                sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
-            }else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
-                //#14
-                 sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
-            }else if(map_ittr.value() == "[Riot::getRankedSummary]\r\n" ||  map_ittr.value() == "[Riot::getRankedSummary]"){
-                //#15
-                sendMessage(r_api->getSummonerName() + " Is currently " + ranked_api->getTier() + " " + ranked_api->getDivision() + " " + ranked_api->getLeaguePoints() + "LP");
-            }else{
-            sendMessage(map_ittr.value());
-            qDebug() << map_ittr.value();
-           }
+              }
+        }
 
-          }
         }
     }
 }

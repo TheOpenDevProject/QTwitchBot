@@ -58,6 +58,7 @@ private:
     MusicPlayer *m_player;
     QMap<QString,int> accessLevel;
 
+    bool isModerator(QString rawIRCData);
 };
 
 #endif // TWITCHMANAGER_H
