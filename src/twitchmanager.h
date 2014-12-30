@@ -29,6 +29,7 @@ public:
     QTimer *updateCommandRate = new QTimer(this);
     void setMusicPlayer(MusicPlayer *p_m_player);
     int getCommandRate();
+
     RiotAPI *r_api;
     RiotAPI_RankedStats *ranked_api;
     TwitchJSONAPIAManger *tmiServices;
@@ -53,6 +54,7 @@ private:
     //Here is where we can create special functions and make internal calls
     void getTime();
     void randomNumber();
+    QString getCallingUser(QString rawIRCData);
     MusicPlayer *m_player;
     QMap<QString,int> accessLevel;
 

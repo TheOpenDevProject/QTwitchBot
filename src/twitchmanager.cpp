@@ -8,7 +8,7 @@ connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()))
 }
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
-    messageHistory << "This is dedicated to Dale Perlov - Thanks for being strong for us - Zac Morris";
+    messageHistory << "Dedicated to M.C we burned a bridge and I'm sorry, so many things I could have done\n I guess it was always going to be so\nThanks for the good times mate.";
     messageHistory << "Attempting to connect to tmi.twitch.tv...";
     local_net_settings.push_back(server);
     local_net_settings.push_back(QString::number(port)); //This must be converted back to an integer for use
@@ -120,7 +120,20 @@ void twitchManager::getTime()
 void twitchManager::randomNumber(){
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
-   sendMessage(QString::number(qrand() % (1000 - 1) - (0) + 0));
+    sendMessage(QString::number(qrand() % (1000 - 1) - (0) + 0));
+}
+
+QString twitchManager::getCallingUser(QString rawIRCData)
+{
+    QRegularExpression userExpression;
+    userExpression.setPattern("^:([^!]+)!.*?");
+    QRegularExpressionMatch nicknameFound;
+    nicknameFound = userExpression.match(rawIRCData);
+    bool hasMatch = nicknameFound.hasMatch();
+    if(hasMatch){
+        qDebug() << nicknameFound.captured(1);
+    }
+    return nicknameFound.captured();
 }
 
 void twitchManager::setCommandList(QMap<QString, QString> commandMap){
@@ -136,7 +149,7 @@ void twitchManager::commandHandler(QString streamInput){
             twitch_socket->flush();
             qDebug() << "Pong Sent";
     }
-
+    getCallingUser(streamInput);
    commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
    commandMatchFound = commandExpression.match(streamInput);
    bool hasMatch = commandMatchFound.hasMatch();
@@ -147,19 +160,7 @@ void twitchManager::commandHandler(QString streamInput){
    QMapIterator<QString,QString> map_ittr(commandMap_kp);
     while(map_ittr.hasNext()){
         map_ittr.next();
-        if(map_ittr.key().at(0) == '[' && map_ittr.key().at(1) == 'M' && map_ittr.key().at(2) == ']'){
 
-                   QString keyNoFlag =  map_ittr.key();
-                   keyNoFlag.remove(0,2);
-
-                if(keyNoFlag == commandFound){
-                for(int i = 0; i < tmiServices->getModerators().size(); i++){
-                    if(streamInput.split("!",QString::SkipEmptyParts).first() == tmiServices->getModerators().at(i)){
-                        qDebug() << "Moderator Command Sent from Moderator";
-                        }
-                    }
-                }
-        }
         if(map_ittr.key() == commandFound){
             //This could be moved into a function pointer array if the list of functions get big
             //We need to deal with the end new line characters if they are present

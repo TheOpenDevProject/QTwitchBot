@@ -466,6 +466,11 @@ void MainWindow::on_pushButton_17_clicked()
     //This is bad, But because TMI doesn't respond fast enough with the whole list, we need to provide a way to refresh the local data anyway.
     ui->viewerList->clear();
     ui->moderatorList->clear();
-    ui->moderatorList->addItems(TwitchChatManager.getModerators());
-    ui->viewerList->addItems(TwitchChatManager.getUsers());
+    for(TwitchUser *e: TwitchChatManager.getUserList()){
+        if(e->getAccessLevel() < 1){
+            ui->viewerList->addItem(e->getTwitchUsername());
+        }else{
+           ui->moderatorList->addItem(e->getTwitchUsername());
+        }
+    }
 }

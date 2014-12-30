@@ -11,19 +11,21 @@
 #include <QNetworkRequest>
 #include <QStringListModel>
 #include <QDebug>
+#include <twitchuser.h>
 class TwitchJSONAPIAManger: public QObject
 {
     Q_OBJECT
 
 public:
     TwitchJSONAPIAManger();
-    QStringList getModerators();
-    QStringList getUsers();
+    ~TwitchJSONAPIAManger();
+    std::vector<TwitchUser*> getUserList();
     void makeRequest(QString ChannelName);
 private:
     QNetworkAccessManager *qnam  = new QNetworkAccessManager();
-    QStringList userList,modList;
+
     QStringListModel userList_m,modList_m;
+    std::vector<TwitchUser*> userList;
 signals:
     //Pain-point
    void dataRequestable();

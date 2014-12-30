@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     apimanager.cpp \
     twitchjsonapiamanger.cpp \
     matchhistoryviewerleague.cpp \
-    leaguematchhistorybox.cpp
+    leaguematchhistorybox.cpp \
+    twitchuser.cpp
 
 HEADERS  += mainwindow.h \
     monitor.h \
@@ -35,7 +36,8 @@ HEADERS  += mainwindow.h \
     apimanager.h \
     twitchjsonapiamanger.h \
     matchhistoryviewerleague.h \
-    leaguematchhistorybox.h
+    leaguematchhistorybox.h \
+    twitchuser.h
 
 FORMS    += mainwindow.ui \
     monitor.ui \

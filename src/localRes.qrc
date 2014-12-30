@@ -10,4 +10,8 @@
         <file>res/TeKeLiLi/background.jpg</file>
         <file>res/Premium-Carbon/background.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>res/Twitch_BlackLogo.png</file>
+        <file>res/Twitch_WhiteLogo.png</file>
+    </qresource>
 </RCC>
