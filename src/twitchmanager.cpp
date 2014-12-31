@@ -9,7 +9,10 @@ connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()))
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
     messageHistory << "Dedicated to M.C we burned a bridge and I'm sorry, so many things I could have done\n I guess it was always going to be so\nThanks for the good times mate.";
+    messageHistory << "Also a massive thankyou to Daniel Gordan - This project honestly would not be where it is without your support";
+    messageHistory << "And finally to all the streamers and dreamers. You guys keep this project alive.";
     messageHistory << "Attempting to connect to tmi.twitch.tv...";
+
     local_net_settings.push_back(server);
     local_net_settings.push_back(QString::number(port)); //This must be converted back to an integer for use
     local_net_settings.push_back(t_realName);
@@ -98,7 +101,7 @@ void twitchManager::connected(){
 }
 
 void twitchManager::disconnected(){
-
+//Maybe implement some flusing cl
 }
 
 void twitchManager::readyRead(){
@@ -139,6 +142,7 @@ bool twitchManager::isModerator(QString rawIRCData){
     QString callingUser = getCallingUser(rawIRCData);
     for(TwitchUser *e : tmiServices->getUserList()){
         if(callingUser == e->getTwitchUsername() && e->getAccessLevel() > 1){
+            qDebug() << "Caller was moderator";
             return true;
         }
     }
@@ -169,40 +173,73 @@ void twitchManager::commandHandler(QString streamInput){
    QMapIterator<QString,QString> map_ittr(commandMap_kp);
     while(map_ittr.hasNext()){
         map_ittr.next();
-        if(map_ittr.key().startsWith("[M]") && !(isModerator(streamInput))){
-           messageHistory << "Non Moderator tried to call moderator command";
-           return;
-        }else{
             if(map_ittr.key() == commandFound){
+   //Check if key is modFlaged if(map_ittr.value().startsWith("[M]") && isModerator(streamInput)){
+
                 //This could be moved into a function pointer array if the list of functions get big
                 //We need to deal with the end new line characters if they are present
+
+                    //On each of these we now check for flags
                 if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
                     getTime();
-                }else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
-                randomNumber();
-                }else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
-                    m_player->nextSong();
-                }else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
-                m_player->prevSong();
-                }else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
+                    }
+
+
+                    //Function Break
+                else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
+                      randomNumber();
+                    }
+
+
+
+                //Function Break
+                else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
+                                m_player->nextSong();
+                }
+
+
+                //Function Break
+
+                else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
+                              m_player->prevSong();
+                }
+
+                //Function Break
+                //This function is as broken as democracy in north korea...
+                else if(map_ittr.value() == "[whatNext]\r\n" || map_ittr.value() == "[whatNext]"){
                     sendMessage(QUrl(m_player->getNextSong()).toString(0x0));
-                }else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
+                }
+
+                //Function Break
+
+                else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
                     //#14
-                     sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
-                }else if(map_ittr.value() == "[Riot::getRankedSummary]\r\n" ||  map_ittr.value() == "[Riot::getRankedSummary]"){
+                 sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
+                }
+
+
+                //Function Break
+
+                else if(map_ittr.value() == "[Riot::getRankedSummary]\r\n" ||  map_ittr.value() == "[Riot::getRankedSummary]"){
                     //#15
                     sendMessage(r_api->getSummonerName() + " Is currently " + ranked_api->getTier() + " " + ranked_api->getDivision() + " " + ranked_api->getLeaguePoints() + "LP");
-                }else{
+                  }
+
+                //General Function Beak
+                else{
+                    //TODO: Check others
                 sendMessage(map_ittr.value());
                 qDebug() << map_ittr.value();
                }
 
               }
-        }
 
+            }
         }
     }
-}
+
+
+
 
 
 
