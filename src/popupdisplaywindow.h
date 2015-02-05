@@ -25,15 +25,15 @@ public:
     float bsX = 30;
     float bsY= 30;
     float setBrushSize(float w,float h);
-        int getActiveBrushType();
-        void setActiveBrushType(int abt);
+    int getActiveBrushType();
+    void setActiveBrushType(int abt);
     enum BRUSH_TYPE{
         SQUARE_BRUSH,
         ELIPSE_BRUSH,
-        LINE_BRUSH        
+        LINE_BRUSH
     };
     
- 
+
 private:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
@@ -56,16 +56,16 @@ public:
 
     //Actual scene
     //Waiting for QGraphicsView to support the use of smart pointers
-  QPaintSceneC *qgs = new QPaintSceneC;
-   void setBrushSize(float w,float h);
-   void setBackgroundColour(QColor s_colour);
-   void setBrushColour(QColor b_colour);
-   void p_addText(QString txtToDraw);
-     void setActiveBrushType(int abt);
+    QPaintSceneC *qgs = new QPaintSceneC;
+    void setBrushSize(float w,float h);
+    void setBackgroundColour(QColor s_colour);
+    void setBrushColour(QColor b_colour);
+    void p_addText(QString txtToDraw);
+    void setActiveBrushType(int abt);
 private:
     Ui::popupDisplayWindow *ui;
     QBrush paintBrush;
-   QPen paintBrush_outer;
+    QPen paintBrush_outer;
 };
 
 #endif // POPUPDISPLAYWINDOW_H

@@ -6,7 +6,7 @@ popupDisplayWindow::popupDisplayWindow(QWidget *parent) :
     ui(new Ui::popupDisplayWindow)
 {
     ui->setupUi(this);
-qgs->setSceneRect(ui->displayView->geometry().left(),ui->displayView->geometry().top(),ui->displayView->geometry().width(),ui->displayView->geometry().height());
+    qgs->setSceneRect(ui->displayView->geometry().left(),ui->displayView->geometry().top(),ui->displayView->geometry().width(),ui->displayView->geometry().height());
     ui->displayView->setScene(qgs);
     ///////////////////////////////////////
     //Our Brushes have some defaults
@@ -17,7 +17,7 @@ qgs->setSceneRect(ui->displayView->geometry().left(),ui->displayView->geometry()
 
 void popupDisplayWindow::setBrushSize(float w, float h)
 {
- qgs->setBrushSize(w,h);
+    qgs->setBrushSize(w,h);
 }
 
 void popupDisplayWindow::setBackgroundColour(QColor s_colour)
@@ -47,28 +47,28 @@ float QPaintSceneC::setBrushSize(float w, float h)
 
 void popupDisplayWindow::p_addText(QString txtToDraw)
 {
-   QFont calibri("Calibri",14,QFont::Bold);
+    QFont calibri("Calibri",14,QFont::Bold);
     qgs->addText(txtToDraw,calibri);
     
 }
 
 void popupDisplayWindow::setActiveBrushType(int abt)
 {
- qgs->setActiveBrushType(abt);   
+    qgs->setActiveBrushType(abt);
 }
 
 void QPaintSceneC::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->MouseButtonPress){
         if(getActiveBrushType() == SQUARE_BRUSH){
-        this->addRect(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
+            this->addRect(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
             qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
-    }else if(getActiveBrushType() == ELIPSE_BRUSH){
+        }else if(getActiveBrushType() == ELIPSE_BRUSH){
             this->addEllipse(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
-                qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+            qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
         }else if(getActiveBrushType() == LINE_BRUSH){
-        //    this->addLine(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
-                qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+            //    this->addLine(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
+            qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
         }
     }
 }
@@ -76,7 +76,7 @@ void QPaintSceneC::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if(event->MouseButtonPress){
         this->addRect(event->scenePos().x() - (bsX / 2),event->scenePos().y() - (bsY / 2),bsX,bsY,paintBrush_outer,paintBrush);
 
-            qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
+        qDebug() << "Mouse Event Handler Active:" <<event->scenePos().x() << "," << event->scenePos().y();
     }
 }
 

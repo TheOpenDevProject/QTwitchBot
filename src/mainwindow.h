@@ -19,6 +19,7 @@
 #include <memory>
 #include <apimanager.h>
 #include "twitchjsonapiamanger.h"
+#include <matchhistorytable.h>
 namespace Ui {
 class MainWindow;
 }
@@ -37,11 +38,12 @@ public:
     RiotAPI *riot_api = new RiotAPI;
     RiotAPI_RankedStats *riot_api_ranked = new RiotAPI_RankedStats;
     TwitchJSONAPIAManger TwitchChatManager;
-     ~MainWindow(){
+    MatchHistoryTable matchHistoryTable;
+    ~MainWindow(){
         //dtor
         qDebug() << "Dtor called";
         //Update made and now using C++11 smart pointers
-       // std::for_each(displayWindows.begin(),displayWindows.end(),std::default_delete<popupDisplayWindow>());
+        // std::for_each(displayWindows.begin(),displayWindows.end(),std::default_delete<popupDisplayWindow>());
         delete ui;
         delete t_manager;
         delete t_commandList;
@@ -67,43 +69,43 @@ private slots:
 
     void on_actionLoad_Music_From_Folder_triggered();
     void on_pushButton_2_clicked();
-   void on_v_Slider_valueChanged(int value);
-   void on_pushButton_5_clicked();
-   void on_pushButton_3_clicked();
-   void on_pushButton_4_clicked();
-   void on_pushButton_7_clicked();
-   void on_comboBox_currentIndexChanged(int index);
-   void on_actionNew_Note_triggered();
-   void on_actionExit_triggered();
-   void on_pushButton_8_clicked();
-   void on_pushButton_10_clicked();
-   void on_pushButton_9_clicked();
-   void on_pushButton_11_clicked();
-   void on_pushButton_13_clicked();
-   void on_actionScript_Editor_triggered();
-   void on_actionReload_Current_TBS_triggered();
+    void on_v_Slider_valueChanged(int value);
+    void on_pushButton_5_clicked();
+    void on_pushButton_3_clicked();
+    void on_pushButton_4_clicked();
+    void on_pushButton_7_clicked();
+    void on_comboBox_currentIndexChanged(int index);
+    void on_actionNew_Note_triggered();
+    void on_actionExit_triggered();
+    void on_pushButton_8_clicked();
+    void on_pushButton_10_clicked();
+    void on_pushButton_9_clicked();
+    void on_pushButton_11_clicked();
+    void on_pushButton_13_clicked();
+    void on_actionScript_Editor_triggered();
+    void on_actionReload_Current_TBS_triggered();
 
-   void on_pushButton_15_clicked();
-void riotAPI_BasicProfileUpdated(QByteArray data);
-void riotAPI_RankedStatsUpdated(QByteArray data);
-void twitchAPI_UpdateUserList();
-void on_setApiButton_clicked();
+    void on_pushButton_15_clicked();
+    void riotAPI_BasicProfileUpdated(QByteArray data);
+    void riotAPI_RankedStatsUpdated(QByteArray data);
+    void twitchAPI_UpdateUserList();
+    void on_setApiButton_clicked();
 
-void on_actionPaypal_triggered();
+    void on_actionPaypal_triggered();
 
-void on_riot_sync_bttn_clicked();
+    void on_riot_sync_bttn_clicked();
 
-void on_L_region_Select_currentIndexChanged(const QString &arg1);
+    void on_L_region_Select_currentIndexChanged(const QString &arg1);
 
-void on_pushButton_16_clicked();
+    void on_pushButton_16_clicked();
 
-void on_pushButton_17_clicked();
+    void on_pushButton_17_clicked();
 
-void on_pushButton_18_clicked();
+    void on_pushButton_18_clicked();
 
 private:
-       QStringList musicFiles;
-       QStringListModel m_musicFiles;
+    QStringList musicFiles;
+    QStringListModel m_musicFiles;
     Ui::MainWindow *ui;
     QStringListModel commandKeys;
     QStringListModel moderatorList;
@@ -116,6 +118,7 @@ private:
     void enableTekeLiLiTheme();
     void enableToxicCarbonTheme();
     QString tbsScriptURL;
+    void init();
 protected:
     void keyPressEvent(QKeyEvent *e);
 

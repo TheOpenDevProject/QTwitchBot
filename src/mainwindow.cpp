@@ -6,30 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-     //Makes our MainWindow the controller
-            ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
-    streamMonitor.show();
-    streamMonitor.setTwitchManager(t_manager);
-      //This is a fairly hacky approach to accessing data from our API managers...
-        t_manager->r_api = riot_api;
-        t_manager->ranked_api = riot_api_ranked;
-        t_manager->tmiServices = &TwitchChatManager; // Fucking hell thats bad but fast...
-        //In this patch BETA 3.0 no nullptr checks are done, be very careful about deleting this before the end of the programs life.
-    ///////////////////////////////////////////////////////
-    // Theme Manger V.10              //
-    //////////////////////////////////////////////////////
-  auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
-  auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
-  auto TeKeLiLi = std::bind(&MainWindow::enableTekeLiLiTheme,this);
-  auto carbonToxic = std::bind(&MainWindow::enableToxicCarbonTheme,this);
-    themeManager.emplace_back(defaultTheme);
-    themeManager.emplace_back(cartoonDark);
-    themeManager.emplace_back(TeKeLiLi);
-    themeManager.emplace_back(carbonToxic);
-    connect(riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
-    connect(riot_api_ranked,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_RankedStatsUpdated(QByteArray)));
-    connect(&TwitchChatManager,SIGNAL(dataRequestable()),this,SLOT(twitchAPI_UpdateUserList()));
+    //Patch note: moved statup functionality to the init function, freeing up the eye in the constructor.
+    this->init();
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -38,13 +16,13 @@ void MainWindow::on_pushButton_clicked()
     //Enable our UI buttons
     ui->addModeratorBttn->setEnabled(true);
     ui->removeModeratorBttn->setEnabled(true);
-     ui->AnnounceBttn->setEnabled(true);
-       ui->banUserBttn->setEnabled(true);
-        ui->unbanUserBttn->setEnabled(true);
-        ui->EnableSlowBttn->setEnabled(true);
-        ui->DisableSlowBttn->setEnabled(true);
-        ui->clearStreamBttn->setEnabled(true);
-        //Set stream webkit view to streamers name
+    ui->AnnounceBttn->setEnabled(true);
+    ui->banUserBttn->setEnabled(true);
+    ui->unbanUserBttn->setEnabled(true);
+    ui->EnableSlowBttn->setEnabled(true);
+    ui->DisableSlowBttn->setEnabled(true);
+    ui->clearStreamBttn->setEnabled(true);
+    //Set stream webkit view to streamers name
 
     ui->streamView->load(QUrl("http://twitch.tv/" + ui->twitch_user->text() + "/popout"));
 
@@ -57,21 +35,21 @@ void MainWindow::on_actionLoad_Commands_triggered()
     if(script_file.isEmpty()){
         qDebug() << "External Error: No File Selected";
     }else{
-    t_manager->setCommandList(t_commandList->loadFromFile(script_file));
-    commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
-    ui->m_CommandView->setModel(&commandKeys);
-    tbsScriptURL = script_file;
-    scriptEditor->loadFromFile(script_file);
-     }
+        t_manager->setCommandList(t_commandList->loadFromFile(script_file));
+        commandKeys.setStringList(t_manager->getCommandKeysAsStringList());
+        ui->m_CommandView->setModel(&commandKeys);
+        tbsScriptURL = script_file;
+        scriptEditor->loadFromFile(script_file);
+    }
 }
 
 void MainWindow::on_addModeratorBttn_clicked()
 {
     bool ok;
-   QString modName = QInputDialog::getText(this,tr("Add Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
-   if(ok && !modName.isEmpty()){
-       t_manager->sendMessage("/mod " + modName);
-   }
+    QString modName = QInputDialog::getText(this,tr("Add Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+    if(ok && !modName.isEmpty()){
+        t_manager->sendMessage("/mod " + modName);
+    }
 }
 //Install a keyboard hander
 void MainWindow::keyPressEvent(QKeyEvent *e){
@@ -92,56 +70,56 @@ void MainWindow::on_clearStreamBttn_clicked()
 void MainWindow::on_removeModeratorBttn_clicked()
 {
     bool ok;
-   QString modName = QInputDialog::getText(this,tr("Remove Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
-   if(ok && !modName.isEmpty()){
-       t_manager->sendMessage("/unmod " + modName);
-   }
+    QString modName = QInputDialog::getText(this,tr("Remove Moderator"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+    if(ok && !modName.isEmpty()){
+        t_manager->sendMessage("/unmod " + modName);
+    }
 }
 
 void MainWindow::on_banUserBttn_clicked()
 {
     bool ok;
-   QString banName = QInputDialog::getText(this,tr("Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
-   if(ok && !banName.isEmpty()){
-       t_manager->sendMessage("/ban " + banName);
-   }
+    QString banName = QInputDialog::getText(this,tr("Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+    if(ok && !banName.isEmpty()){
+        t_manager->sendMessage("/ban " + banName);
+    }
 }
 
 void MainWindow::on_unbanUserBttn_clicked()
 {
     bool ok;
-   QString banName = QInputDialog::getText(this,tr("Un-Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
-   if(ok && !banName.isEmpty()){
-       t_manager->sendMessage("/unban " + banName);
-   }
+    QString banName = QInputDialog::getText(this,tr("Un-Ban User"),tr("Enter Twitch Username"),QLineEdit::Normal,NULL,&ok);
+    if(ok && !banName.isEmpty()){
+        t_manager->sendMessage("/unban " + banName);
+    }
 }
 
 void MainWindow::on_AnnounceBttn_clicked()
 {
     bool ok;
-   QString message = QInputDialog::getText(this,tr("Make Announcement"),tr("Enter  Announcement To Send"),QLineEdit::Normal,NULL,&ok);
-   if(ok && !message.isEmpty()){
-       t_manager->sendMessage(message);
-   }
+    QString message = QInputDialog::getText(this,tr("Make Announcement"),tr("Enter  Announcement To Send"),QLineEdit::Normal,NULL,&ok);
+    if(ok && !message.isEmpty()){
+        t_manager->sendMessage(message);
+    }
 }
 
 void MainWindow::on_EnableSlowBttn_clicked()
 {
     bool ok;
-   int delayTime = QInputDialog::getInt(this,tr("Set Slow Mode"),tr("Delay Time"),0,1,214743647,1,&ok);
-   if(ok){
-       t_manager->sendMessage("/slow " + QString::number(delayTime));
-   }
+    int delayTime = QInputDialog::getInt(this,tr("Set Slow Mode"),tr("Delay Time"),0,1,214743647,1,&ok);
+    if(ok){
+        t_manager->sendMessage("/slow " + QString::number(delayTime));
+    }
 }
 
 void MainWindow::on_DisableSlowBttn_clicked()
 {
-       t_manager->sendMessage("/slowoff");
+    t_manager->sendMessage("/slowoff");
 }
 
 void MainWindow::on_actionDisable_Javascript_triggered()
 {
-     ui->streamView->settings()->setAttribute(QWebSettings::JavascriptEnabled,false);
+    ui->streamView->settings()->setAttribute(QWebSettings::JavascriptEnabled,false);
 }
 
 void MainWindow::on_actionEnable_Javascript_triggered()
@@ -158,10 +136,10 @@ void MainWindow::on_actionLoad_Music_From_Folder_triggered()
         err_out.setText("You MUST select at least ONE file for playback");
         err_out.exec();
     }else{
-      t_manager->setMusicPlayer(&streamPlayer);
-    streamPlayer.setPlaylistFromFile(musicFiles);
-    m_musicFiles.setStringList(musicFiles);
-    ui->music_List_view->setModel(&m_musicFiles);
+        t_manager->setMusicPlayer(&streamPlayer);
+        streamPlayer.setPlaylistFromFile(musicFiles);
+        m_musicFiles.setStringList(musicFiles);
+        ui->music_List_view->setModel(&m_musicFiles);
     }
 }
 
@@ -208,22 +186,22 @@ void MainWindow::enableCartoonDarkTheme(){
     this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/cartoonDark/cartoon-dark-bng.jpg);} QLabel{color:#FA4B4B;} QPushButton{background-color:#FA4B4B; color:#fff;}");
     ui->addModeratorBttn->setFlat(true);
     ui->removeModeratorBttn->setFlat(true);
-     ui->AnnounceBttn->setFlat(true);
-       ui->banUserBttn->setFlat(true);
-        ui->unbanUserBttn->setFlat(true);
-        ui->EnableSlowBttn->setFlat(true);
-        ui->DisableSlowBttn->setFlat(true);
-        ui->clearStreamBttn->setFlat(true);
+    ui->AnnounceBttn->setFlat(true);
+    ui->banUserBttn->setFlat(true);
+    ui->unbanUserBttn->setFlat(true);
+    ui->EnableSlowBttn->setFlat(true);
+    ui->DisableSlowBttn->setFlat(true);
+    ui->clearStreamBttn->setFlat(true);
 
 
-        ui->addModeratorBttn->setAutoFillBackground(true);
-        ui->removeModeratorBttn->setAutoFillBackground(true);
-         ui->AnnounceBttn->setAutoFillBackground(true);
-           ui->banUserBttn->setAutoFillBackground(true);
-            ui->unbanUserBttn->setAutoFillBackground(true);
-            ui->EnableSlowBttn->setAutoFillBackground(true);
-            ui->DisableSlowBttn->setAutoFillBackground(true);
-            ui->clearStreamBttn->setAutoFillBackground(true);
+    ui->addModeratorBttn->setAutoFillBackground(true);
+    ui->removeModeratorBttn->setAutoFillBackground(true);
+    ui->AnnounceBttn->setAutoFillBackground(true);
+    ui->banUserBttn->setAutoFillBackground(true);
+    ui->unbanUserBttn->setAutoFillBackground(true);
+    ui->EnableSlowBttn->setAutoFillBackground(true);
+    ui->DisableSlowBttn->setAutoFillBackground(true);
+    ui->clearStreamBttn->setAutoFillBackground(true);
 
 }
 
@@ -238,52 +216,79 @@ void MainWindow::enableTekeLiLiTheme()
     streamMonitor.setStyleSheet("#Monitor{border-image:url(:/themes/res/TeKeLiLi/background.jpg); background-color:none;}");
     ui->addModeratorBttn->setFlat(true);
     ui->removeModeratorBttn->setFlat(true);
-     ui->AnnounceBttn->setFlat(true);
-       ui->banUserBttn->setFlat(true);
-        ui->unbanUserBttn->setFlat(true);
-        ui->EnableSlowBttn->setFlat(true);
-        ui->DisableSlowBttn->setFlat(true);
-        ui->clearStreamBttn->setFlat(true);
+    ui->AnnounceBttn->setFlat(true);
+    ui->banUserBttn->setFlat(true);
+    ui->unbanUserBttn->setFlat(true);
+    ui->EnableSlowBttn->setFlat(true);
+    ui->DisableSlowBttn->setFlat(true);
+    ui->clearStreamBttn->setFlat(true);
 
 
-        ui->addModeratorBttn->setAutoFillBackground(true);
-        ui->removeModeratorBttn->setAutoFillBackground(true);
-         ui->AnnounceBttn->setAutoFillBackground(true);
-           ui->banUserBttn->setAutoFillBackground(true);
-            ui->unbanUserBttn->setAutoFillBackground(true);
-            ui->EnableSlowBttn->setAutoFillBackground(true);
-            ui->DisableSlowBttn->setAutoFillBackground(true);
-            ui->clearStreamBttn->setAutoFillBackground(true);
+    ui->addModeratorBttn->setAutoFillBackground(true);
+    ui->removeModeratorBttn->setAutoFillBackground(true);
+    ui->AnnounceBttn->setAutoFillBackground(true);
+    ui->banUserBttn->setAutoFillBackground(true);
+    ui->unbanUserBttn->setAutoFillBackground(true);
+    ui->EnableSlowBttn->setAutoFillBackground(true);
+    ui->DisableSlowBttn->setAutoFillBackground(true);
+    ui->clearStreamBttn->setAutoFillBackground(true);
 
 }
 
 void MainWindow::enableToxicCarbonTheme()
 {
- QMessageBox dedication;
- dedication.setText("This theme is dedicated to Riot ToxicHawk");
- dedication.exec();
- dedication.setText("Patient tester and Inspiration for the project - Thankyou buddy :)");
- dedication.exec();
-  this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/Premium-Carbon/background.png);} #settingsSetup_lbl{color:#fff;} #twitchUser_lbl{color:#fff;} #toathToken_lbl{color:#fff;} progressBar{color#fff;} QPushButton{background-color:#A4F069; color:#000;}");
- ui->addModeratorBttn->setFlat(true);
- ui->removeModeratorBttn->setFlat(true);
-  ui->AnnounceBttn->setFlat(true);
+    QMessageBox dedication;
+    dedication.setText("This theme is dedicated to Riot ToxicHawk");
+    dedication.exec();
+    dedication.setText("Patient tester and Inspiration for the project - Thankyou buddy :)");
+    dedication.exec();
+    this->setStyleSheet("#MainWindow{border-image:url(:/themes/res/Premium-Carbon/background.png);} #settingsSetup_lbl{color:#fff;} #twitchUser_lbl{color:#fff;} #toathToken_lbl{color:#fff;} progressBar{color#fff;} QPushButton{background-color:#A4F069; color:#000;}");
+    ui->addModeratorBttn->setFlat(true);
+    ui->removeModeratorBttn->setFlat(true);
+    ui->AnnounceBttn->setFlat(true);
     ui->banUserBttn->setFlat(true);
-     ui->unbanUserBttn->setFlat(true);
-     ui->EnableSlowBttn->setFlat(true);
-     ui->DisableSlowBttn->setFlat(true);
-     ui->clearStreamBttn->setFlat(true);
+    ui->unbanUserBttn->setFlat(true);
+    ui->EnableSlowBttn->setFlat(true);
+    ui->DisableSlowBttn->setFlat(true);
+    ui->clearStreamBttn->setFlat(true);
 
 
-     ui->addModeratorBttn->setAutoFillBackground(true);
-     ui->removeModeratorBttn->setAutoFillBackground(true);
-      ui->AnnounceBttn->setAutoFillBackground(true);
-        ui->banUserBttn->setAutoFillBackground(true);
-         ui->unbanUserBttn->setAutoFillBackground(true);
-         ui->EnableSlowBttn->setAutoFillBackground(true);
-         ui->DisableSlowBttn->setAutoFillBackground(true);
-         ui->clearStreamBttn->setAutoFillBackground(true);
+    ui->addModeratorBttn->setAutoFillBackground(true);
+    ui->removeModeratorBttn->setAutoFillBackground(true);
+    ui->AnnounceBttn->setAutoFillBackground(true);
+    ui->banUserBttn->setAutoFillBackground(true);
+    ui->unbanUserBttn->setAutoFillBackground(true);
+    ui->EnableSlowBttn->setAutoFillBackground(true);
+    ui->DisableSlowBttn->setAutoFillBackground(true);
+    ui->clearStreamBttn->setAutoFillBackground(true);
 
+}
+
+void MainWindow::init()
+{
+    //Makes our MainWindow the controller
+    ui->streamView->settings()->setAttribute(QWebSettings::PluginsEnabled,true);
+    streamMonitor.show();
+    streamMonitor.setTwitchManager(t_manager);
+    //This is a fairly hacky approach to accessing data from our API managers...
+    t_manager->r_api = riot_api;
+    t_manager->ranked_api = riot_api_ranked;
+    t_manager->tmiServices = &TwitchChatManager; // Fucking hell thats bad but fast...
+    //In this patch BETA 3.0 no nullptr checks are done, be very careful about deleting this before the end of the programs life.
+    ///////////////////////////////////////////////////////
+    // Theme Manger V.10              //
+    //////////////////////////////////////////////////////
+    auto cartoonDark = std::bind(&MainWindow::enableCartoonDarkTheme,this);
+    auto defaultTheme = std::bind(&MainWindow::enableDefaultTheme,this);
+    auto TeKeLiLi = std::bind(&MainWindow::enableTekeLiLiTheme,this);
+    auto carbonToxic = std::bind(&MainWindow::enableToxicCarbonTheme,this);
+    themeManager.emplace_back(defaultTheme);
+    themeManager.emplace_back(cartoonDark);
+    themeManager.emplace_back(TeKeLiLi);
+    themeManager.emplace_back(carbonToxic);
+    connect(riot_api,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_BasicProfileUpdated(QByteArray)));
+    connect(riot_api_ranked,SIGNAL(requestComplete(QByteArray)),this,SLOT(riotAPI_RankedStatsUpdated(QByteArray)));
+    connect(&TwitchChatManager,SIGNAL(dataRequestable()),this,SLOT(twitchAPI_UpdateUserList()));
 }
 
 void MainWindow::on_actionNew_Note_triggered()
@@ -299,7 +304,7 @@ void MainWindow::on_actionExit_triggered()
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
-   qApp->quit();
+    qApp->quit();
 }
 
 void MainWindow::on_pushButton_8_clicked()
@@ -308,11 +313,11 @@ void MainWindow::on_pushButton_8_clicked()
 
     if(!displayWindows.empty()){
         QString winTitle = QInputDialog::getText(this,tr("Set Window Title"),tr("Enter A Window Title"),QLineEdit::Normal,NULL,&ok);
-   if(ok){
-        for(int i;i < displayWindows.size();i++){
-        displayWindows.at(i)->setWindowTitle(winTitle);
+        if(ok){
+            for(int i;i < displayWindows.size();i++){
+                displayWindows.at(i)->setWindowTitle(winTitle);
+            }
         }
-    }
     }else{
         QMessageBox errorbox;
         errorbox.setText("There are currently 0 note windows active, No need to set a title on nothing :)");
@@ -324,9 +329,9 @@ void MainWindow::on_pushButton_10_clicked()
 {
     if(!displayWindows.empty()){
         QColor bngcolour = QColorDialog::getColor(Qt::white,this,tr("Select A Colour"),0);
-   for (int i;i < displayWindows.size(); i++){
-   displayWindows.at(i)->setBackgroundColour(bngcolour);
-   }
+        for (int i;i < displayWindows.size(); i++){
+            displayWindows.at(i)->setBackgroundColour(bngcolour);
+        }
     }else{
         //No note windows in vector
         QMessageBox errorbox;
@@ -340,7 +345,7 @@ void MainWindow::on_pushButton_9_clicked()
     if(!displayWindows.empty()){
         QColor brushcolour = QColorDialog::getColor(Qt::white,this,tr("Select A Colour"),0);
         for (int i;i < displayWindows.size(); i++){
-        displayWindows.at(i)->setBrushColour(brushcolour);
+            displayWindows.at(i)->setBrushColour(brushcolour);
         }
     }else{
         //No note windows in vector
@@ -356,11 +361,11 @@ void MainWindow::on_pushButton_11_clicked()
     bool yOk = false;
     if(!displayWindows.empty()){
         float brushSizeX = QInputDialog::getDouble(this,tr("Enter Width"),tr("Enter A Width"),0,0,2147483647,2,&xOk,0);
-         float brushSizeY = QInputDialog::getDouble(this,tr("Enter Height"),tr("Enter A Height"),0,0,2147483647,2,&yOk,0);
+        float brushSizeY = QInputDialog::getDouble(this,tr("Enter Height"),tr("Enter A Height"),0,0,2147483647,2,&yOk,0);
         if(xOk && yOk){
-          for(int i;i < displayWindows.size(); i++){
-              displayWindows.at(i)->setBrushSize(brushSizeX,brushSizeY);
-          }
+            for(int i;i < displayWindows.size(); i++){
+                displayWindows.at(i)->setBrushSize(brushSizeX,brushSizeY);
+            }
         }
     }else{
         QMessageBox errorbox;
@@ -379,7 +384,7 @@ void MainWindow::on_pushButton_13_clicked()
 
 void MainWindow::on_actionScript_Editor_triggered()
 {
- //   scriptEditor->show();
+    //   scriptEditor->show();
 
 }
 
@@ -392,18 +397,18 @@ void MainWindow::on_actionReload_Current_TBS_triggered()
 
 void MainWindow::on_pushButton_15_clicked()
 {
-riot_api->requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
+    riot_api->requestBasicProfile(ui->summoner_ID_Entry->text().toUtf8());
 
 }
 
 void MainWindow::riotAPI_BasicProfileUpdated(QByteArray data){
-//This is considered a full flush of the stats.
+    //This is considered a full flush of the stats.
     ui->apiDebugView->append(data + "\n");
-ui->SummonerName_lbl->setText(riot_api->getSummonerName());
-ui->SummonerLevelLbl->setText(riot_api->getSummonerLevel());
-riot_api_ranked->setSummonerID(riot_api->getSummonerID());
-ui->riot_sync_bttn->setEnabled(true);
-riot_api_ranked->getRankedStats();
+    ui->SummonerName_lbl->setText(riot_api->getSummonerName());
+    ui->SummonerLevelLbl->setText(riot_api->getSummonerLevel());
+    riot_api_ranked->setSummonerID(riot_api->getSummonerID());
+    ui->riot_sync_bttn->setEnabled(true);
+    riot_api_ranked->getRankedStats();
 
 }
 
@@ -417,8 +422,8 @@ void MainWindow::on_setApiButton_clicked()
         warning.exec();
         ui->apiDebugView->append("RiotAPI - API Key Is Invalid - Must be 36 characters long\n");
     }else{
-          riot_api->setAPIKey(ui->apiKeyEdit->text());
-          riot_api_ranked->setAPIKey(ui->apiKeyEdit->text());
+        riot_api->setAPIKey(ui->apiKeyEdit->text());
+        riot_api_ranked->setAPIKey(ui->apiKeyEdit->text());
     }
 
 }
@@ -470,12 +475,12 @@ void MainWindow::on_pushButton_17_clicked()
         if(e->getAccessLevel() < 1){
             ui->viewerList->addItem(e->getTwitchUsername());
         }else{
-           ui->moderatorList->addItem(e->getTwitchUsername());
+            ui->moderatorList->addItem(e->getTwitchUsername());
         }
     }
 }
 
 void MainWindow::on_pushButton_18_clicked()
 {
-
+    matchHistoryTable.show();
 }

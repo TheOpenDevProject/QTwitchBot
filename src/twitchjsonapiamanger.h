@@ -28,7 +28,7 @@ private:
     std::vector<TwitchUser*> userList;
 signals:
     //Pain-point
-   void dataRequestable();
+    void dataRequestable();
 protected:
     QByteArray rawRequest;
     void parseJSON();

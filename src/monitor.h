@@ -16,11 +16,11 @@ class Monitor : public QWidget
 
 public:
     explicit Monitor(QWidget *parent = 0);
-  QTimer *feedTimer = new QTimer(this);
-   void setTwitchManager(twitchManager *t_manage);
+    QTimer *feedTimer = new QTimer(this);
+    void setTwitchManager(twitchManager *t_manage);
     ~Monitor();
 private slots:
-   void updateFeed();
+    void updateFeed();
 private:
     Ui::Monitor *ui;
     void mouseMoveEvent(QMouseEvent *e);

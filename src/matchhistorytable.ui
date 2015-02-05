@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MatchHistoryTable</class>
+ <widget class="QWidget" name="MatchHistoryTable">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>841</width>
+    <height>692</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Match History</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="localRes.qrc">
+    <normaloff>:/core/res/twitchBotIcon.png</normaloff>:/core/res/twitchBotIcon.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Sync</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QTableWidget" name="MatchHistoryViewTbl"/>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="localRes.qrc"/>
+ </resources>
+ <connections/>
+</ui>

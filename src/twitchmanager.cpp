@@ -4,7 +4,7 @@
 
 twitchManager::twitchManager()
 {
-connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()));
+    connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()));
 }
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
@@ -27,12 +27,12 @@ void twitchManager::connectToChannel(QString server, int port, QString t_Nick, Q
     twitch_socket->connectToHost(server,port);
     if(!twitch_socket->waitForConnected()){
         messageHistory << "Unable to connect to tmi.twitch.tv";
-   }else{
+    }else{
         messageHistory << "Connected!";
-    //    updateCommandRate->start(3000);
+        //    updateCommandRate->start(3000);
 
-        }
-   }
+    }
+}
 
 QStringList twitchManager::getMessageHistory(){
     return messageHistory;
@@ -46,9 +46,9 @@ void twitchManager::sendMessage(QString rawMessage)
     message_to_send.append(" :");
     message_to_send.append(rawMessage);
     message_to_send.append("\r\n");
-   twitch_socket->write(message_to_send);
-   twitch_socket->flush();
-   messageHistory << "Message to stream(" + rawMessage + ")";
+    twitch_socket->write(message_to_send);
+    twitch_socket->flush();
+    messageHistory << "Message to stream(" + rawMessage + ")";
 }
 
 void twitchManager::sendRaw(QByteArray rawMessage)
@@ -61,11 +61,11 @@ void twitchManager::sendRaw(QByteArray rawMessage)
 
 void twitchManager::getModeratorList()
 {
-sendMessage("/mods");
+    sendMessage("/mods");
 }
 
 void twitchManager::connected(){
-//This is all done acording to the RFC published by the ieef
+    //This is all done acording to the RFC published by the ieef
     QByteArray oAuthToken;
     oAuthToken.append("PASS ");
     oAuthToken.append(local_net_settings.at(5)); //Setting number 5 is the token
@@ -100,7 +100,7 @@ void twitchManager::connected(){
 }
 
 void twitchManager::disconnected(){
-//Maybe implement some flusing cl
+    //Maybe implement some flusing cl
 }
 
 void twitchManager::readyRead(){
@@ -108,8 +108,8 @@ void twitchManager::readyRead(){
 
 
     while( !(array = twitch_socket->readLine()).isNull()){
-   commandHandler(array);
-    messageHistory << array;
+        commandHandler(array);
+        messageHistory << array;
     }
     qDebug() << messageHistory;
 }
@@ -117,7 +117,7 @@ void twitchManager::readyRead(){
 void twitchManager::getTime()
 {
     QTime sysTime;
-   sendMessage(sysTime.currentTime().toString());
+    sendMessage(sysTime.currentTime().toString());
 }
 void twitchManager::randomNumber(){
     QTime time = QTime::currentTime();
@@ -147,8 +147,8 @@ bool twitchManager::isModerator(QString rawIRCData){
             messageHistory << e->getTwitchUsername();
             return true;
 
-                }
         }
+    }
     return false;
 }
 
@@ -161,56 +161,56 @@ void twitchManager::setCommandList(QMap<QString, QString> commandMap){
 
 
 void twitchManager::commandHandler(QString streamInput){
-  //  commandExpression.setPattern("(?<=");
+    //  commandExpression.setPattern("(?<=");
     if(streamInput == "PING :tmi.twitch.tv\r\n"){
-    twitch_socket->write("PONG tmi.twitch.tv\r\n");
-            twitch_socket->flush();
-            qDebug() << "Pong Sent";
+        twitch_socket->write("PONG tmi.twitch.tv\r\n");
+        twitch_socket->flush();
+        qDebug() << "Pong Sent";
     }
 
-   commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
-   commandMatchFound = commandExpression.match(streamInput);
-   bool hasMatch = commandMatchFound.hasMatch();
-   if(hasMatch){
-      commandRateMS++;
-   QString commandFound = commandMatchFound.captured();
-   commandFound.chop(1);
-   QMapIterator<QString,QString> map_ittr(commandMap_kp);
-    while(map_ittr.hasNext()){
-        map_ittr.next();
+    commandExpression.setPattern("(?<=PRIVMSG\\s#"+ local_net_settings.at(3) +"\\s:).*");
+    commandMatchFound = commandExpression.match(streamInput);
+    bool hasMatch = commandMatchFound.hasMatch();
+    if(hasMatch){
+        commandRateMS++;
+        QString commandFound = commandMatchFound.captured();
+        commandFound.chop(1);
+        QMapIterator<QString,QString> map_ittr(commandMap_kp);
+        while(map_ittr.hasNext()){
+            map_ittr.next();
             if(map_ittr.key() == commandFound){
                 //Breaking down the logic
 
-   if(isModerator(streamInput)){
-                messageHistory << "Caller Was Moderator";
-        }
+                if(isModerator(streamInput)){
+                    messageHistory << "Caller Was Moderator";
+                }
 
                 //This could be moved into a function pointer array if the list of functions get big
                 //We need to deal with the end new line characters if they are present
 
-                    //On each of these we now check for flags
+                //On each of these we now check for flags
                 if(map_ittr.value() == "[GetTime]\r\n" || map_ittr.value() == "[GetTime]"){
                     getTime();
-                    }
+                }
 
 
-                    //Function Break
+                //Function Break
                 else if(map_ittr.value() == "[randomNumber]\r\n" || map_ittr.value() == "[randomNumber]"){
-                      randomNumber();
-                    }
+                    randomNumber();
+                }
 
 
 
                 //Function Break
                 else if(map_ittr.value() == "[nextSong]\r\n" || map_ittr.value() == "[nextSong]"){
-                                m_player->nextSong();
+                    m_player->nextSong();
                 }
 
 
                 //Function Break
 
                 else if(map_ittr.value() == "[prevSong]\r\n" || map_ittr.value() == "[prevSong]"){
-                              m_player->prevSong();
+                    m_player->prevSong();
                 }
 
                 //Function Break
@@ -223,7 +223,7 @@ void twitchManager::commandHandler(QString streamInput){
 
                 else if(map_ittr.value() == "[Riot::getSummonerLevel]\r\n" ||  map_ittr.value() == "[Riot::getSummonerLevel]"){
                     //#14
-                 sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
+                    sendMessage(r_api->getSummonerName() + " is currently level: " +r_api->getSummonerLevel());
                 }
 
 
@@ -232,20 +232,20 @@ void twitchManager::commandHandler(QString streamInput){
                 else if(map_ittr.value() == "[Riot::getRankedSummary]\r\n" ||  map_ittr.value() == "[Riot::getRankedSummary]"){
                     //#15
                     sendMessage(r_api->getSummonerName() + " Is currently " + ranked_api->getTier() + " " + ranked_api->getDivision() + " " + ranked_api->getLeaguePoints() + "LP");
-                  }
+                }
 
                 //General Function Beak
                 else{
                     //TODO: Check others
-                sendMessage(map_ittr.value());
-                qDebug() << map_ittr.value();
-               }
-
-              }
+                    sendMessage(map_ittr.value());
+                    qDebug() << map_ittr.value();
+                }
 
             }
+
         }
     }
+}
 
 
 
@@ -256,14 +256,14 @@ QStringList twitchManager::getCommandKeysAsStringList()
 {
     if(!commandMap_kp.isEmpty()){
         QStringList keyList;
-       QMapIterator<QString,QString>map_ittr(commandMap_kp);
-       while(map_ittr.hasNext()){
-           map_ittr.next();
+        QMapIterator<QString,QString>map_ittr(commandMap_kp);
+        while(map_ittr.hasNext()){
+            map_ittr.next();
             keyList << map_ittr.key();
-       }
-       return keyList;
+        }
+        return keyList;
     }else{
-    qDebug() << "No Keys Found!";
+        qDebug() << "No Keys Found!";
     }
 
 }

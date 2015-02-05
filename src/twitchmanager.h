@@ -40,12 +40,12 @@ signals:
 public slots:
     void connected();
     void disconnected();
-       void readyRead();
-       void updateCommandRate_Slot();
+    void readyRead();
+    void updateCommandRate_Slot();
 private:
-       int commandRateMS = 0;
+    int commandRateMS = 0;
 
-     QStringList local_net_settings;
+    QStringList local_net_settings;
     QTcpSocket *twitch_socket;
     QStringList messageHistory;
     QMap<QString,QString>commandMap_kp;

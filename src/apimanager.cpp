@@ -37,7 +37,7 @@ void RiotAPI::requestSummonerIcon(QString summoner_name)
     if(summoner_name.isEmpty()){
         qDebug() << "Summoner name must be provided";
     }else {
-       qnam->get(QNetworkRequest(QUrl("http://avatar.leagueoflegends.com/oce/" + summoner_name + ".png")));
+        qnam->get(QNetworkRequest(QUrl("http://avatar.leagueoflegends.com/oce/" + summoner_name + ".png")));
     }
 }
 
@@ -52,25 +52,20 @@ void RiotAPI::setSummonerRegion(QString region)
 }
 
 void RiotAPI::ParseAndSet(){
-    //First 8 bytes of a png image are 137 80 78 71 13 10 26 10 (ref:libpng.org)
-        if(rawapidata.startsWith("137 80 78 71 13 10 26 10")){
-            qDebug() << "Data is a PNG file (Parse not available)";
-            return;
-        }
     //Each state considered critical to valid data can cause a break in the function because, proceeding with an error would be useless.
     if(rawapidata.isEmpty()){
         qDebug() << "Basic profile no json data found";
-   return;
+        return;
     }
 
     //We have data, Proceed with JSON specific validation + loading document
-        QJsonParseError jerror;
-        QJsonDocument jdoc  = QJsonDocument::fromJson(rawapidata,&jerror);
+    QJsonParseError jerror;
+    QJsonDocument jdoc  = QJsonDocument::fromJson(rawapidata,&jerror);
 
-       //Get the root element of the basic summoner profile, Currently we can expect this to be the summoners name.
+    //Get the root element of the basic summoner profile, Currently we can expect this to be the summoners name.
     const QJsonObject jObject = jdoc.object();
     QJsonValue jVal = jObject.value(summonerName);
-//qDebug() << jVal;
+    //qDebug() << jVal;
     QJsonObject playerDetails = jVal.toObject();
     //Basic Summoner Profile values
     QJsonValue playerID = playerDetails["id"];
@@ -78,15 +73,15 @@ void RiotAPI::ParseAndSet(){
     QJsonValue playerProfileIconId = playerDetails["profileIconId"];
     QJsonValue playerLevel = playerDetails["summonerLevel"];
     //Now we just store these as members
-        summonerID = playerID.toVariant().toString();
-        summonerLevel = playerLevel.toVariant().toString();
-        summonerProfileIcon = playerProfileIconId.toVariant().toString();
+    summonerID = playerID.toVariant().toString();
+    summonerLevel = playerLevel.toVariant().toString();
+    summonerProfileIcon = playerProfileIconId.toVariant().toString();
 }
 
 
 RiotAPI_RankedStats::RiotAPI_RankedStats(QObject *parent)
 {
-//BUG-Fix - Class inherits RiotAPI contructor...
+    //BUG-Fix - Class inherits RiotAPI contructor...
 
 }
 
@@ -117,21 +112,21 @@ void RiotAPI_RankedStats::ParseAndSet()
     //Current Division
     division = jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["division"].toString();
     //Is player on a win streak
-             if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
-              isHotStreak = "On A Win Streak";
-                   }else{
-              isHotStreak = "Not On A Win Streak";
-                     }
+    if(jdoc.object()[summonerID].toArray()[0].toObject()["entries"].toArray()[0].toObject()["isHotStreak"].toBool() == true){
+        isHotStreak = "On A Win Streak";
+    }else{
+        isHotStreak = "Not On A Win Streak";
+    }
     //Current Tier
-     tier = jdoc.object()[summonerID].toArray()[0].toObject()["tier"].toString();
+    tier = jdoc.object()[summonerID].toArray()[0].toObject()["tier"].toString();
 
 
     //Developer Debug Info
 
-             qDebug() << "Summoner is currently on: " << getLeaguePoints() << "LP";
-             qDebug() << "Summoner's Division is:" << getDivision();
-             qDebug() << "Summoner is currently " << getIsHotStreak();
-             qDebug() << "Summoner is currently " << getTier() << "Tier";
+    qDebug() << "Summoner is currently on: " << getLeaguePoints() << "LP";
+    qDebug() << "Summoner's Division is:" << getDivision();
+    qDebug() << "Summoner is currently " << getIsHotStreak();
+    qDebug() << "Summoner is currently " << getTier() << "Tier";
 
 }
 

@@ -18,17 +18,17 @@ public:
     explicit RiotAPI(QObject *parent = 0);
     void requestBasicProfile(QString summoner_name);
     void requestSummonerIcon(QString summoner_name);
-  void setAPIKey(QString riotAPIKey);
-  void setSummonerRegion(QString region);
-  QPixmap getSummonerProfilePixmap(){return summonerProfilePixmap;}
-  QString getSummonerID(){return summonerID;}
-  QString getSummonerName(){return summonerName;}
-  QString getSummonerLevel(){return summonerLevel;}
-  QString getSummonerProfileIcon(){return summonerProfileIcon;}
-  QString getAPIKey(){return riotAPI_Key;}
+    void setAPIKey(QString riotAPIKey);
+    void setSummonerRegion(QString region);
+    QPixmap getSummonerProfilePixmap(){return summonerProfilePixmap;}
+    QString getSummonerID(){return summonerID;}
+    QString getSummonerName(){return summonerName;}
+    QString getSummonerLevel(){return summonerLevel;}
+    QString getSummonerProfileIcon(){return summonerProfileIcon;}
+    QString getAPIKey(){return riotAPI_Key;}
     QString getSummonerRegion(){return summonerRegion;}
 private:
-QByteArray rawapidata;
+    QByteArray rawapidata;
 protected:
     virtual void ParseAndSet();
     QString riotAPI_Key;
@@ -40,15 +40,15 @@ protected:
     QString summonerRegion;
     QPixmap summonerProfilePixmap;
 signals:
-void requestComplete(QByteArray data);
-void requestComplete();
+    void requestComplete(QByteArray data);
+    void requestComplete();
 public slots:
 
-virtual void replyFinished(QNetworkReply*);
+    virtual void replyFinished(QNetworkReply*);
 };
 
 class RiotAPI_RankedStats: public RiotAPI{
-Q_OBJECT
+    Q_OBJECT
 public:
     explicit RiotAPI_RankedStats(QObject *parent =0);
     void getRankedStats();

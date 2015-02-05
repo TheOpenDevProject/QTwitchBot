@@ -10,9 +10,9 @@ Monitor::Monitor(QWidget *parent) :
     connect(feedTimer,SIGNAL(timeout()),this,SLOT(updateFeed()));
     feedTimer->start(100);
     this->setWindowFlags(Qt::FramelessWindowHint);
-   ui->m_DataView->setModel(&feed_model);
-   //We can enable the developer option by pressing F7
-   ui->developer_sendRaw->setVisible(false);
+    ui->m_DataView->setModel(&feed_model);
+    //We can enable the developer option by pressing F7
+    ui->developer_sendRaw->setVisible(false);
 }
 
 Monitor::~Monitor()

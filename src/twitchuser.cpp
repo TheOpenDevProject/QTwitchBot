@@ -24,5 +24,5 @@ int TwitchUser::getAccessLevel()
 }
 
 QString TwitchUser::getTwitchUsername(){
-return twitchUsername;
+    return twitchUsername;
 }
