@@ -22,8 +22,6 @@ SOURCES += main.cpp\
     scriptedit.cpp \
     apimanager.cpp \
     twitchjsonapiamanger.cpp \
-    matchhistoryviewerleague.cpp \
-    leaguematchhistorybox.cpp \
     twitchuser.cpp
 
 HEADERS  += mainwindow.h \
@@ -35,15 +33,12 @@ HEADERS  += mainwindow.h \
     scriptedit.h \
     apimanager.h \
     twitchjsonapiamanger.h \
-    matchhistoryviewerleague.h \
-    leaguematchhistorybox.h \
     twitchuser.h
 
 FORMS    += mainwindow.ui \
     monitor.ui \
     popupdisplaywindow.ui \
-    scriptedit.ui \
-    matchhistoryviewerleague.ui
+    scriptedit.ui
 
 RESOURCES += \
     localRes.qrc

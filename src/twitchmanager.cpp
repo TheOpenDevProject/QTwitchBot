@@ -8,8 +8,7 @@ connect(updateCommandRate,SIGNAL(timeout()),this,SLOT(updateCommandRate_Slot()))
 }
 
 void twitchManager::connectToChannel(QString server, int port, QString t_Nick, QString t_realName, QString t_channel, QString t_username, QString t_oAuthToken){
-    messageHistory << "Dedicated to M.C we burned a bridge and I'm sorry, so many things I could have done\n I guess it was always going to be so\nThanks for the good times mate.";
-    messageHistory << "Also a massive thankyou to Daniel Gordan - This project honestly would not be where it is without your support";
+    messageHistory << "A massive thankyou to Daniel Gordan - This project honestly would not be where it is without your support";
     messageHistory << "And finally to all the streamers and dreamers. You guys keep this project alive.";
     messageHistory << "Attempting to connect to tmi.twitch.tv...";
 
@@ -140,14 +139,20 @@ QString twitchManager::getCallingUser(QString rawIRCData)
 }
 bool twitchManager::isModerator(QString rawIRCData){
     QString callingUser = getCallingUser(rawIRCData);
+    qDebug() << "Function(isModerator) @ CALL LEVEL 0";
     for(TwitchUser *e : tmiServices->getUserList()){
-        if(callingUser == e->getTwitchUsername() && e->getAccessLevel() > 1){
-            qDebug() << "Caller was moderator";
+
+        if(callingUser == e->getTwitchUsername() && e->getAccessLevel() >= 1){
+            messageHistory << QString::number(e->getAccessLevel());
+            messageHistory << e->getTwitchUsername();
             return true;
+
+                }
         }
-    }
-return false;
+    return false;
 }
+
+
 
 void twitchManager::setCommandList(QMap<QString, QString> commandMap){
     commandMap_kp = commandMap;
@@ -174,7 +179,11 @@ void twitchManager::commandHandler(QString streamInput){
     while(map_ittr.hasNext()){
         map_ittr.next();
             if(map_ittr.key() == commandFound){
-   //Check if key is modFlaged if(map_ittr.value().startsWith("[M]") && isModerator(streamInput)){
+                //Breaking down the logic
+
+   if(isModerator(streamInput)){
+                messageHistory << "Caller Was Moderator";
+        }
 
                 //This could be moved into a function pointer array if the list of functions get big
                 //We need to deal with the end new line characters if they are present

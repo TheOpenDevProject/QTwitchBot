@@ -116,6 +116,7 @@ private:
     void enableTekeLiLiTheme();
     void enableToxicCarbonTheme();
     QString tbsScriptURL;
+    void init();
 protected:
     void keyPressEvent(QKeyEvent *e);
 
