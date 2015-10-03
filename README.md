@@ -1,3 +1,8 @@
+It is with sad news that I announce that I have no futher plans to develop QTwitchBot, It was a fun ride while it lasted and I may revive the project at a later stage how ever breaking changes to twitch and my lack of time for projects already means that I wish to focus my attention on other projects.
+I am on GitHub every day, if you decide to fix this project I will be more than happy to review your code and add merge it with this repository.
+
+Regards - TheOpenDevProject.
+
 QTwitchBot is an opensource Twitch.tv bot that runs on Windows/Mac/Linux
 
 ===============================================
